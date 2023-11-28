@@ -1,5 +1,3 @@
-import com.sun.xml.internal.ws.encoding.soap.SOAP12Constants;
-
 import java.util.Scanner;
 
 /**
@@ -21,9 +19,9 @@ public class Utilidades {
      */
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int numero;
-        System.out.print(mensaje);
+        System.out.println(mensaje);
         do {
-            System.out.println("Introduce un número menor que "+ maximo+ " y mayor que "+minimo+": ");
+            System.out.print("Introduce un número menor que "+ maximo+ " y mayor que "+minimo+": ");
             numero = teclado.nextInt();
             if (numero<minimo || numero>maximo){
                 System.out.println("Numero incorrecto");
@@ -43,7 +41,7 @@ public class Utilidades {
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         long numero;
-        System.out.print(mensaje);
+        System.out.println(mensaje);
         do {
             System.out.println("Introduce un número menor que "+ maximo+ " y mayor que "+minimo+": ");
             numero = teclado.nextLong();
@@ -64,7 +62,7 @@ public class Utilidades {
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
-        System.out.print(mensaje);
+        System.out.println(mensaje);
         do {
             System.out.println("Introduce un número menor que "+ maximo+ " y mayor que "+minimo+": ");
             numero = teclado.nextDouble();
@@ -85,8 +83,8 @@ public class Utilidades {
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
+        System.out.println(mensaje);
         do {
-            System.out.print(mensaje);
             System.out.println("Introduce un caracter entre "+ maximo + " y "+minimo+": ");
             letra = teclado.next().charAt(0);
             if (letra<minimo || letra>maximo){
@@ -110,8 +108,8 @@ public class Utilidades {
         System.out.println(mensaje);
         do {
             while (dia<1 || dia> 31){
-            System.out.print("Introduce el día: ");
-            dia = teclado.nextInt();
+                System.out.print("Introduce el día: ");
+                dia = teclado.nextInt();
             }
             while (mes<1 || mes> 12){
                 System.out.print("Introduce el mes: ");
@@ -123,6 +121,7 @@ public class Utilidades {
             }
             if (!Fecha.comprobarFecha(dia,mes,anio)){
                 System.out.println("Fecha incorrecta ");
+                dia = mes = anio = 0;
             }
         }while(!Fecha.comprobarFecha(dia,mes,anio));
         return new Fecha(dia, mes, anio);
@@ -158,15 +157,16 @@ public class Utilidades {
             }
             if (!Fecha.comprobarFecha(dia,mes,anio)){
                 System.out.println("Fecha incorrecta ");
+                dia = mes = anio = 0;
             }
         }while(!Fecha.comprobarFecha(dia,mes,anio));
         do {
-                System.out.print("Introduce la hora: ");
-                hora = teclado.nextInt();
-                System.out.print("Introduce el minuto: ");
-                minuto = teclado.nextInt();
-                System.out.print("Introduce los segundos: ");
-                segundo = teclado.nextInt();
+            System.out.print("Introduce la hora: ");
+            hora = teclado.nextInt();
+            System.out.print("Introduce el minuto: ");
+            minuto = teclado.nextInt();
+            System.out.print("Introduce los segundos: ");
+            segundo = teclado.nextInt();
             if (!Fecha.comprobarHora(hora,minuto,segundo)){
                 System.out.println("Hora incorrecta ");
             }
