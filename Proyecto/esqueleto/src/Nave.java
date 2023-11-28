@@ -5,6 +5,7 @@
  * @author
  * @version     1.0
  */
+
 public class Nave {
     private String marca;
     private String modelo;
@@ -68,4 +69,8 @@ public class Nave {
     public String toStringSimple() {
         return getMarca()+" "+getModelo()+" "+getMatricula();
     }
+
+
+
+
 }
