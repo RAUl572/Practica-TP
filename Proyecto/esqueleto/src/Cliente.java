@@ -37,29 +37,29 @@ public class Cliente {
     }
     // TODO: Texto que debe generar: Zapp Brannigan, zapp.brannigan@dop.gov
     public String toString() {
-
+        return (getNombre()+" "+getApellidos()+", "+getEmail());
     }
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
-
+        return getListaEnvios().estaLlena();
     }
     // TODO: Devuelve un envío en función de su posición
     public Envio getEnvio(int i) {
-
+        return getListaEnvios().getEnvio(i);
     }
     public ListaEnvios getListaEnvios() {
         return listaEnvios;
     }
     // TODO: Añade un envío al cliente
     public boolean aniadirEnvio(Envio envio) {
-
+        return getListaEnvios().insertarEnvio(envio);
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
     }
     // TODO: Elimina el envío de la lista de envíos del pasajero
     public boolean cancelarEnvio(String localizador) {
-
+        return getListaEnvios().eliminarEnvio(localizador);
     }
     public void listarEnvios() {
         listaEnvios.listarEnvios();
@@ -80,10 +80,14 @@ public class Cliente {
      * @return Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
-
-
-
-
+        String nombre, apellidos, email;
+        if (!clientes.estaLlena()) {
+            do {
+                nombre = Utilidades.leerCadena(teclado, "Nombre: ");
+                apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
+                email = Utilidades.leerCadena(teclado, "Email: ");
+            } while (!correctoEmail(email)&&(clientes.buscarClienteEmail(email)==null));
+        }else {return null;}
         return new Cliente(nombre, apellidos, email, maxEnvios);
     }
 
@@ -94,6 +98,6 @@ public class Cliente {
      * @return
      */
     public static boolean correctoEmail(String email) {
-        return false;
+        return (email.substring('@').equals("planetexpress.com"));
     }
 }

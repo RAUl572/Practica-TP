@@ -6,6 +6,7 @@
  * @author Noel López Losada
  * @version     1.0
  */
+
 public class Nave {
     /**
      * Marca de la nave.
@@ -117,4 +118,8 @@ public class Nave {
     public String toStringSimple() {
         return getMarca()+" "+getModelo()+" "+getMatricula();
     }
+
+
+
+
 }
