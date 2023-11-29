@@ -2,8 +2,8 @@
  * La clase Nave define la marca, modelo, matrícula, el alcance y el tamaño de la bodega de carga
  * de las naves que la flota de Planet Express que transportan los pedidos.
  *
- * @author Raúl Fernández Iglesias
- * @author Noel López Losada
+ * @author Raúl Fernández Iglesias.
+ * @author Noel López Losada.
  * @version     1.0
  */
 
@@ -37,12 +37,12 @@ public class Nave {
     /**
      * Constructor de la clase que pide todos los atributos de la clase.
      *
-     * @param marca marca de la nave.
-     * @param modelo modelo de la nave.
-     * @param matricula matrícula de la nave.
-     * @param columnas columnas de la bodega de carga de la nave.
-     * @param filas filas de la bodega de carga de la nave.
-     * @param alcance alcance de la nave en UAs.
+     * @param marca Marca de la nave.
+     * @param modelo Modelo de la nave.
+     * @param matricula Matrícula de la nave.
+     * @param columnas Columnas de la bodega de carga de la nave.
+     * @param filas Filas de la bodega de carga de la nave.
+     * @param alcance Alcance de la nave en UAs.
      */
     public Nave(String marca, String modelo, String matricula, int columnas, int filas, double alcance) {
         this.marca = marca;
@@ -116,7 +116,7 @@ public class Nave {
      * @return ejemplo del formato -> "Planet Express One (EP-245732X)"
      */
     public String toStringSimple() {
-        return getMarca()+" "+getModelo()+" "+getMatricula();
+        return getMarca()+" ("+getModelo()+") "+getMatricula();
     }
 
 
