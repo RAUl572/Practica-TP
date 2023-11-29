@@ -97,6 +97,7 @@ public class Cliente {
      * @param email
      * @return
      */
+    // La condición es que sea una @, un . y un .
     public static boolean correctoEmail(String email) {
         return (email.substring('@').equals("planetexpress.com"));
     }

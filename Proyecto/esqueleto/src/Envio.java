@@ -1,5 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -67,6 +66,7 @@ public class Envio {
     }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
+        return getPorte().desocuparHueco(getLocalizador()) && getCliente().cancelarEnvio(getLocalizador());
     }
 
     /**
@@ -87,19 +87,36 @@ public class Envio {
      *     Precio: 13424,56 SSD
      */
     public boolean generarFactura(String fichero) {
+        DataOutputStream out = null;
         try {
-
-
-
-
-
-
-
-
-            return true;
-        } catch (FileNotFoundException e) {
-            return false;
+            out = new DataOutputStream(new FileOutputStream(fichero,false));
+            out.writeUTF(
+                    "-----------------------------------------------------\n"+
+                        "--------- Factura del envío"+getLocalizador()+"--------\n-"+
+                        "-----------------------------------------------------\n"+
+                        "\nPorte: "+getPorte().getID()+
+                        "\nOrigen: "+getPorte().getMuelleOrigen()+
+                        "\nDestino: "+getPorte().getMuelleDestino()+
+                        "\nSalida: "+getPorte().getSalida()+
+                        "\nLlegada: "+getPorte().getLlegada()+
+                        "\nCliente: "+getCliente().toString()+
+                        "\nHueco: "+getHueco()+
+                        "\nPrecio: "+getPrecio()+
+                        "\n"
+            );
+        }catch (FileNotFoundException e){System.out.println(e.getMessage());return false;}
+        catch (IOException ex){System.out.println(ex.getMessage());}
+        finally {
+            try {
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            }catch (IOException ex){
+                System.out.println(ex.getMessage());
+            }
         }
+        return true;
     }
 
 
@@ -114,9 +131,9 @@ public class Envio {
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
-
-
-
+        for (int i=1;i<=3;i++){
+            localizador.append((char)(65+rand.nextInt(25)));
+        }
         return localizador.toString();
     }
 
@@ -132,9 +149,23 @@ public class Envio {
      * @return Envio para el porte y cliente especificados
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
+        boolean error;
+        int x;
+        try {
+            do {
+                error=false;
+                System.out.println("Contaratar envío como cliente ya registrado (1) o como nuevo cliente (2): ");
+                x = teclado.nextInt();
+                switch (x){
+                    case 1:
 
-
-
-        return ;
+                        break;
+                    case 2:
+                        cliente = Cliente.altaCliente(teclado, );
+                        break;
+                }
+            }while (error);
+        }catch(IOException ex){error = true;}
+        return null;
     }
 }
