@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class ListaNaves {
     private Nave[] naves;
+    private int ocupacion;
 
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
@@ -17,21 +18,20 @@ public class ListaNaves {
      * @param capacidad
      */
     public ListaNaves(int capacidad) {
-        
-		
-		
+        naves = new Nave[capacidad];
+		ocupacion = 0;
     }
     // TODO: Devuelve el número de naves que hay en la lista
     public int getOcupacion() {
-
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
-
+        return  naves[ocupacion-1]!=null;
     }
 	// TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
-        return null;
+        return naves[posicion];
     }
 
     /**
@@ -40,9 +40,12 @@ public class ListaNaves {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
-
-
-        return false;
+        boolean llena = estaLlena();
+        if (!llena){
+            naves[ocupacion] = nave;
+            ocupacion++;
+        }
+        return llena;
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
@@ -50,16 +53,26 @@ public class ListaNaves {
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
-
-        return null;
+        int indice=0;
+        boolean encontrada = false;
+        Nave buscada = null;
+        while (indice<ocupacion && !encontrada){
+            if (naves[indice].getMatricula().equals(matricula)){
+                encontrada = true;
+                buscada = naves[indice];
+            }
+            indice ++;
+        }
+        return buscada;
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-
+        if (ocupacion>1) {
+            for (int i = 0; i < ocupacion; i++) {
+                System.out.println(naves[i].toString());
+            }
+        }else System.out.println("No hay naves");
     }
-
-
-
     /**
      * TODO: Permite seleccionar una nave existente a partir de su matrícula, y comprueba si dispone de un alcance
      *  mayor o igual que el pasado como argumento, usando el mensaje pasado como argumento para la solicitud y
