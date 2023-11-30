@@ -81,7 +81,7 @@ public class Cliente {
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
         String nombre, apellidos, email;
-        if (!clientes.estaLlena()) {
+        if (!clientes.estaLlena()){
             do {
                 nombre = Utilidades.leerCadena(teclado, "Nombre: ");
                 apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
@@ -98,7 +98,7 @@ public class Cliente {
      * @return
      */
     // La condición es que sea una @, un . y un .
-    public static boolean correctoEmail(String email) {
-        return (email.substring('@').equals("planetexpress.com"));
+    public static boolean correctoEmail(String email){
+        return ((email.contains("@"))&&(email.split("@")[1].contains(".")));
     }
 }
