@@ -110,6 +110,13 @@ public class Nave {
         return getMarca()+" "+getModelo()+" ("+getMatricula()+"): "+getColumnas()*getFilas()+" contenedores, hasta "+getAlcance()+" UA";
     }
 
+    /**
+     * @return
+     */
+    public String toStringCsv() {
+        return getMarca()+";"+getModelo()+";"+getMatricula()+";"+getFilas()+";"+getColumnas()+";"+getAlcance();
+    }
+
 
     /**
      * TODO: Crea un String con los datos de una nave con el siguiente formato:
