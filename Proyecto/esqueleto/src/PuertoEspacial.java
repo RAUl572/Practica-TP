@@ -130,14 +130,20 @@ public class PuertoEspacial {
      * @return ejemplo -> "Gaia Galactic Terminal(GGT), en (1.0 90.0 0.0), con 8 muelles" (Radio, Azimut, Polar)
      */
     public String toString() {
-        return nombre + " (" + codigo + "), en (" + radio + " " + azimut + " " + polar + " " + "), con " + numMuelles + " muelles";
+        return getNombre() + " (" + getCodigo() + "), en (" + getRadio() + " " + getAzimut() + " " + getPolar() + " " + "), con " + getMuelles() + " muelles";
     }
 
+    /**
+     * @return
+     */
+    public String toStringCsv() {
+        return getNombre() + ";" + getCodigo() + ";" + getRadio() + ";" + getAzimut() + ";" + getPolar() + ";" + getMuelles();
+    }
     /**
      * TODO: Método que crea un String con los datos de un aeropuerto con el siguiente formato:
      * @return ejemplo -> "Gaia Galactic Terminal (GGT)"
      */
     public String toStringSimple() {
-        return nombre + " (" + codigo + ")";
+        return getNombre() + " (" + getCodigo() + ")";
     }
 }
