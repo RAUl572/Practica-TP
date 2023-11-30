@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -11,6 +14,7 @@ import java.util.Scanner;
 public class ListaNaves {
     private Nave[] naves;
     private int ocupacion;
+    private final int CAPACIDAD;
 
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
@@ -20,6 +24,7 @@ public class ListaNaves {
     public ListaNaves(int capacidad) {
         naves = new Nave[capacidad];
 		ocupacion = 0;
+        CAPACIDAD = capacidad;
     }
     // TODO: Devuelve el número de naves que hay en la lista
     public int getOcupacion() {
@@ -27,7 +32,7 @@ public class ListaNaves {
     }
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
-        return  naves[ocupacion-1]!=null;
+        return  naves[CAPACIDAD-1]!=null;
     }
 	// TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
@@ -40,12 +45,12 @@ public class ListaNaves {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
-        boolean llena = estaLlena();
-        if (!llena){
+        boolean espacios = !estaLlena();
+        if (espacios){
             naves[ocupacion] = nave;
             ocupacion++;
         }
-        return llena;
+        return espacios;
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
@@ -63,11 +68,14 @@ public class ListaNaves {
             }
             indice ++;
         }
+        if (indice==ocupacion){
+            System.out.println("La nave con matrícula " + matricula + " no ha sido encontrada");
+        }
         return buscada;
     }
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
-        if (ocupacion>1) {
+        if (ocupacion>0) {
             for (int i = 0; i < ocupacion; i++) {
                 System.out.println(naves[i].toString());
             }
@@ -85,8 +93,14 @@ public class ListaNaves {
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
         Nave nave = null;
-
-
+        do {
+            System.out.println(mensaje);
+            String matricula = teclado.nextLine();
+            nave = buscarNave(matricula);
+            if (nave.getAlcance()<alcance){
+                System.out.println("La nave no tiene suficiente alcance");
+            }
+        }while (nave.getAlcance()<alcance);
         return nave;
     }
 
@@ -99,12 +113,17 @@ public class ListaNaves {
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw = null;
         try {
-
+            pw = new PrintWriter(nombre);
+            for (int i=0;i<ocupacion;i++){
+                pw.println(naves[i].toStringCsv());
+            }
             return true;
         } catch (Exception e) {
             return false;
         } finally {
-
+                if (pw!=null){
+                    pw.close();
+                }
         }
     }
 
@@ -119,11 +138,21 @@ public class ListaNaves {
         ListaNaves listaNaves = new ListaNaves(capacidad);
         Scanner sc = null;
         try {
+            sc = new Scanner(new FileReader(fichero));
+            String [] nave;
+            Nave nueva;
+            while (sc.hasNextLine()){
+                nave = sc.nextLine().split(";");
+                nueva = new Nave(nave[0],nave[1],nave[2],Integer.parseInt(nave[4]), Integer.parseInt(nave[3]),Integer.parseInt(nave[5]));
+                listaNaves.insertarNave(nueva);
+            }
 
         } catch (Exception e) {
             return null;
         } finally {
-
+            if (sc!=null){
+                sc.close();
+            }
         }
         return listaNaves;
     }

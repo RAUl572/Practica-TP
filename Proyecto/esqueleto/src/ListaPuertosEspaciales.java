@@ -1,3 +1,4 @@
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -10,27 +11,31 @@ import java.util.Scanner;
  */
 public class ListaPuertosEspaciales {
     private PuertoEspacial[] lista;
+    private int ocupacion;
+
+    private final int CAPACIDAD;
 
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
+     * @param capacidad indica el número de puertos espaciales que hay.
      */
     public ListaPuertosEspaciales(int capacidad) {
-        
-		
+		lista = new PuertoEspacial[capacidad];
+        ocupacion = 0;
+        CAPACIDAD = capacidad;
     }
     // TODO: Devuelve el número de puertos espaciales que hay en la lista
     public int getOcupacion() {
-
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        return lista[CAPACIDAD-1]!=null;
     }
 	// TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
-        return null;
+        return lista[i];
     }
 
     /**
@@ -39,8 +44,12 @@ public class ListaPuertosEspaciales {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
-
-        return false;
+        boolean espacios = !estaLlena();
+        if (espacios) {
+            lista[ocupacion] = puertoEspacial;
+            ocupacion++;
+        }
+        return espacios;
     }
 
     /**
@@ -49,8 +58,20 @@ public class ListaPuertosEspaciales {
      * @return Puerto espacial que encontramos o null si no existe
      */
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
-
-        return null;
+        PuertoEspacial buscado = null;
+        int indice=0;
+        boolean encontrada = false;
+        while (indice<ocupacion && !encontrada){
+            if (lista[indice].getCodigo().equals(codigo)){
+                encontrada = true;
+                buscado = lista[indice];
+            }
+            indice ++;
+        }
+        if (indice==ocupacion){
+            System.out.println("El puerto con código " + codigo + " no ha sido encontrado");
+        }
+        return buscado;
     }
 
     /**
@@ -63,8 +84,11 @@ public class ListaPuertosEspaciales {
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
         PuertoEspacial puertoEspacial = null;
-
-
+        do {
+            System.out.println(mensaje);
+            String codigo = teclado.nextLine();
+            puertoEspacial = buscarPuertoEspacial(codigo);
+        }while (puertoEspacial==null);
         return puertoEspacial;
     }
 
@@ -76,12 +100,17 @@ public class ListaPuertosEspaciales {
     public boolean escribirPuertosEspacialesCsv(String nombre) {
         PrintWriter pw = null;
         try {
-
+            pw = new PrintWriter(nombre);
+            for (int i=0;i<ocupacion;i++){
+                pw.println(lista[i].toStringCsv());
+            }
             return true;
         } catch (Exception e) {
             return false;
         } finally {
-
+            if (pw!=null){
+                pw.close();
+            }
         }
     }
 
@@ -97,11 +126,21 @@ public class ListaPuertosEspaciales {
         ListaPuertosEspaciales listaPuertosEspaciales = new ListaPuertosEspaciales(capacidad);
         Scanner sc = null;
         try {
+            sc = new Scanner(new FileReader(fichero));
+            String[] puerto;
+            PuertoEspacial nuevo;
+            while (sc.hasNext()){
+                puerto = sc.nextLine().split(";");
+                nuevo = new PuertoEspacial(puerto[0],puerto[1],Double.parseDouble(puerto[2]),Double.parseDouble(puerto[3]),Double.parseDouble(puerto[4]),Integer.parseInt(puerto[5]));
+                listaPuertosEspaciales.insertarPuertoEspacial(nuevo);
+            }
 
         } catch (Exception e) {
             return null;
         } finally {
-
+            if (sc!=null){
+                sc.close();
+            }
         }
         return listaPuertosEspaciales;
     }
