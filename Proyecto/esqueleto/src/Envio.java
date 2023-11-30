@@ -149,23 +149,24 @@ public class Envio {
      * @return Envio para el porte y cliente especificados
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
-        boolean error;
-        int x;
+        boolean repetir;
+        int x,fila, columna;
         try {
             do {
-                error=false;
-                System.out.println("Contaratar envío como cliente ya registrado (1) o como nuevo cliente (2): ");
-                x = teclado.nextInt();
-                switch (x){
-                    case 1:
-
-                        break;
-                    case 2:
-                        cliente = Cliente.altaCliente(teclado, );
-                        break;
-                }
-            }while (error);
-        }catch(IOException ex){error = true;}
+                repetir=false;
+                x = Utilidades.leerNumero(teclado,"Contaratar envío como cliente ya registrado (1) o como nuevo cliente (2): ",1,2);
+                //Apañar ListaClientes
+                if (x==2){
+                    cliente = Cliente.altaCliente(teclado,new ListaClientes(1),((porte.getNave().getFilas())*(porte.getNave().getColumnas())));}
+                else if ((!porte.porteLleno())){
+                    do {
+                        fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
+                        columna = Utilidades.leerNumero(teclado,"Seleccione una columna: ",1,porte.getNave().getColumnas());
+                    } while (!porte.huecoOcupado(fila, columna));
+                    return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,columna,porte.getPrecio());
+                }else {System.out.println("Porte lleno");return null;}
+            }while (repetir);
+        }catch(IOException ex){repetir = true;}
         return null;
     }
 }
