@@ -123,7 +123,7 @@ public class Nave {
      * @return ejemplo del formato -> "Planet Express One (EP-245732X)"
      */
     public String toStringSimple() {
-        return getMarca()+" ("+getModelo()+") "+getMatricula();
+        return getMarca()+" "+getModelo()+" ("+getMatricula()+") ";
     }
 
 
