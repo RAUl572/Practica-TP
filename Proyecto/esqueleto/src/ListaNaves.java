@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +22,7 @@ public class ListaNaves {
      */
     public ListaNaves(int capacidad) {
         naves = new Nave[capacidad];
-		ocupacion = 0;
+        ocupacion = 0;
         CAPACIDAD = capacidad;
     }
     // TODO: Devuelve el número de naves que hay en la lista
@@ -34,7 +33,7 @@ public class ListaNaves {
     public boolean estaLlena() {
         return  naves[CAPACIDAD-1]!=null;
     }
-	// TODO: Devuelve nave dado un indice
+    // TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
         return naves[posicion];
     }
@@ -97,10 +96,10 @@ public class ListaNaves {
             System.out.println(mensaje);
             String matricula = teclado.nextLine();
             nave = buscarNave(matricula);
-            if (nave.getAlcance()<alcance){
+            if (nave != null && nave.getAlcance()<alcance){
                 System.out.println("La nave no tiene suficiente alcance");
             }
-        }while (nave.getAlcance()<alcance);
+        }while (nave == null || nave.getAlcance()<alcance);
         return nave;
     }
 
@@ -121,9 +120,9 @@ public class ListaNaves {
         } catch (Exception e) {
             return false;
         } finally {
-                if (pw!=null){
-                    pw.close();
-                }
+            if (pw!=null){
+                pw.close();
+            }
         }
     }
 
@@ -143,7 +142,7 @@ public class ListaNaves {
             Nave nueva;
             while (sc.hasNextLine()){
                 nave = sc.nextLine().split(";");
-                nueva = new Nave(nave[0],nave[1],nave[2],Integer.parseInt(nave[4]), Integer.parseInt(nave[3]),Integer.parseInt(nave[5]));
+                nueva = new Nave(nave[0],nave[1],nave[2],Integer.parseInt(nave[4]), Integer.parseInt(nave[3]),Double.parseDouble(nave[5]));
                 listaNaves.insertarNave(nueva);
             }
 

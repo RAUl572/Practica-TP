@@ -21,7 +21,7 @@ public class ListaPuertosEspaciales {
      * @param capacidad indica el número de puertos espaciales que hay.
      */
     public ListaPuertosEspaciales(int capacidad) {
-		lista = new PuertoEspacial[capacidad];
+        lista = new PuertoEspacial[capacidad];
         ocupacion = 0;
         CAPACIDAD = capacidad;
     }
@@ -33,7 +33,7 @@ public class ListaPuertosEspaciales {
     public boolean estaLlena() {
         return lista[CAPACIDAD-1]!=null;
     }
-	// TODO: Devuelve un puerto espacial dado un indice
+    // TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
         return lista[i];
     }
@@ -73,7 +73,6 @@ public class ListaPuertosEspaciales {
         }
         return buscado;
     }
-
     /**
      * TODO: Permite seleccionar un puerto espacial existente a partir de su código, usando el mensaje pasado como
      *  argumento para la solicitud y siguiendo el orden y los textos mostrados en el enunciado.
