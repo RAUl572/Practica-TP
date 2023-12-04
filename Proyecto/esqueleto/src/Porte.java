@@ -6,8 +6,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Raúl Fernández Iglesias.
+ * @author Noel López Losada.
  * @version     1.0
  */
 public class Porte {
@@ -37,6 +37,16 @@ public class Porte {
      * @param precio
      */
     public Porte(String id, Nave nave, PuertoEspacial origen, int muelleOrigen, Fecha salida, PuertoEspacial destino, int muelleDestino, Fecha llegada, double precio) {
+        this.id = id;
+        this.nave = nave;
+        this.origen = origen;
+        this.muelleOrigen = muelleOrigen;
+        this.salida = salida;
+        this.destino = destino;
+        this.muelleDestino = muelleDestino;
+        this.llegada = llegada;
+        this.precio = precio;
+        huecos = new boolean[nave.getFilas()][nave.getColumnas()];
 
     }
     public String getID() {
@@ -68,7 +78,6 @@ public class Porte {
     }
     // TODO: Devuelve el número de huecos libres que hay en el porte
     public int numHuecosLibres() {
-
     }
     // TODO: ¿Están llenos todos los huecos?
     public boolean porteLleno() {
@@ -76,7 +85,7 @@ public class Porte {
     }
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
-
+        return huecos[fila-1][columna-1];
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
@@ -102,8 +111,7 @@ public class Porte {
      * @return
      */
     public boolean ocuparHueco(Envio envio) {
-
-        return false;
+        return huecos[envio.getFila()][envio.getColumna()]=true;
     }
 
 
@@ -113,8 +121,7 @@ public class Porte {
      * @return
      */
     public boolean desocuparHueco(String localizador) {
-
-        return false;
+        return huecos[buscarEnvio(localizador).getFila()][buscarEnvio(localizador).getColumna()]=false;
     }
 
     /**
@@ -125,7 +132,6 @@ public class Porte {
     public String toString() {
         return "";
     }
-
 
     /**
      * TODO: Devuelve una cadena con información abreviada del vuelo
@@ -189,7 +195,9 @@ public class Porte {
      * @return ejemplo -> "PM0123"
      */
     public static String generarID(Random rand) {
-        return "PM";
+        String id="PM";
+        for (int i=1;i<=4;i++){id=id.concat(Integer.toString(rand.nextInt(9)));}
+        return id;
     }
 
     /**
