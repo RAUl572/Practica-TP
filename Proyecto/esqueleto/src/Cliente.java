@@ -55,7 +55,7 @@ public class Cliente {
         return getListaEnvios().insertarEnvio(envio);
     }
     public Envio buscarEnvio(String localizador) {
-        return listaEnvios.buscarEnvio(localizador);
+        return getListaEnvios().buscarEnvio(localizador);
     }
     // TODO: Elimina el envío de la lista de envíos del pasajero
     public boolean cancelarEnvio(String localizador) {

@@ -5,8 +5,8 @@ import java.util.Scanner;
 /**
  * Description of the class
  *
- * @author
- * @author
+ * @author Raúl Fernández Iglesias.
+ * @author Noel López Losada.
  * @version     1.0
  */
 public class Envio {
@@ -62,6 +62,7 @@ public class Envio {
     public String toString() {
         return ("Envío "+getLocalizador()+
                 " para Porte "+getPorte().toStringSimple()
+                //...
                 );
     }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
@@ -99,8 +100,9 @@ public class Envio {
                         "\nDestino: "+getPorte().getMuelleDestino()+
                         "\nSalida: "+getPorte().getSalida()+
                         "\nLlegada: "+getPorte().getLlegada()+
-                        "\nCliente: "+getCliente().toString()+
-                        "\nHueco: "+getHueco()+
+                        "\nPasajero: "+getCliente().toString()+
+                        "\ntipo de billete: "+
+                        "\nAsiento: "+getHueco()+
                         "\nPrecio: "+getPrecio()+
                         "\n"
             );
@@ -112,9 +114,7 @@ public class Envio {
                     out.flush();
                     out.close();
                 }
-            }catch (IOException ex){
-                System.out.println(ex.getMessage());
-            }
+            }catch (IOException ex){System.out.println(ex.getMessage());}
         }
         return true;
     }
@@ -157,12 +157,14 @@ public class Envio {
                 x = Utilidades.leerNumero(teclado,"Contaratar envío como cliente ya registrado (1) o como nuevo cliente (2): ",1,2);
                 //Apañar ListaClientes
                 if (x==2){
-                    cliente = Cliente.altaCliente(teclado,new ListaClientes(1),((porte.getNave().getFilas())*(porte.getNave().getColumnas())));}
-                else if ((!porte.porteLleno())){
+                    cliente = Cliente.altaCliente(teclado,new ListaClientes(1),((porte.getNave().getFilas())*(porte.getNave().getColumnas())));
+                }
+                if ((!porte.porteLleno())){
+                    porte.imprimirMatrizHuecos();
                     do {
                         fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
                         columna = Utilidades.leerNumero(teclado,"Seleccione una columna: ",1,porte.getNave().getColumnas());
-                    } while (!porte.huecoOcupado(fila, columna));
+                    } while (porte.huecoOcupado(fila, columna));
                     return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,columna,porte.getPrecio());
                 }else {System.out.println("Porte lleno");return null;}
             }while (repetir);
