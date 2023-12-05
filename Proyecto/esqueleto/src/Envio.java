@@ -65,6 +65,13 @@ public class Envio {
                 //...
                 );
     }
+
+    /**
+     * @return String con los datos del envio en formato CSV
+     */
+    public String toStringCSV(){
+        return getLocalizador()+";"+getPorte().getID()+";"+getCliente().getEmail()+";"+getFila()+";"+getColumna()+";"+getPrecio();
+    }
     // TODO: Cancela este envío, eliminándolo de la lista de envíos del porte y del cliente correspondiente
     public boolean cancelar() {
         return getPorte().desocuparHueco(getLocalizador()) && getCliente().cancelarEnvio(getLocalizador());
