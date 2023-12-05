@@ -13,26 +13,29 @@ import java.util.Scanner;
  */
 public class ListaEnvios {
     private Envio[] envios;
+    private int ocupacion;
+    private final int CAPACIDAD;
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
      * @param capacidad
      */
     public ListaEnvios(int capacidad) {
-		
-		
+		envios = new Envio[capacidad];
+        ocupacion = 0;
+        CAPACIDAD = capacidad;
     }
     // TODO: Devuelve el número de envíos que hay en la lista
     public int getOcupacion() {
-
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista de envíos?
     public boolean estaLlena() {
-
+        return envios[CAPACIDAD-1]!=null;
     }
 	//TODO: Devuelve el envio dado un indice
     public Envio getEnvio(int i) {
-        return null;
+        return envios[i];
     }
 
     /**
@@ -41,8 +44,12 @@ public class ListaEnvios {
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarEnvio(Envio envio) {
-
-        return false;
+        boolean insertar = !estaLlena();
+        if (insertar){
+            envios[ocupacion] = envio;
+            ocupacion++;
+        }
+        return insertar;
     }
 
     /**
@@ -51,9 +58,17 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String localizador) {
-
-
-        return null;
+        int indice = 0;
+        boolean encontrado = false;
+        Envio envio = null;
+        while (indice<ocupacion && !encontrado){
+            if (localizador.equals(envios[indice].getLocalizador())){
+                envio = envios[indice];
+                encontrado = true;
+            }
+            indice++;
+        }
+        return envio;
     }
 
     /**
@@ -64,19 +79,45 @@ public class ListaEnvios {
      * @return el envio que encontramos o null si no existe
      */
     public Envio buscarEnvio(String idPorte, int fila, int columna) {
-
-
-        return null;
+        int indice = 0;
+        boolean encontrado = false;
+        Envio envio = null;
+        while (indice<ocupacion && !encontrado){
+            if (idPorte.equals(envios[indice].getPorte().getID()) && fila == envios[indice].getFila() && columna == envios[indice].getColumna()){
+                envio = envios[indice];
+                encontrado = true;
+            }
+            indice++;
+        }
+        return envio;
     }
-
+    public int posicionEnvio(String localizador){
+        int posicion=0, devolver= -1;
+        boolean encontrado = false;
+        while (posicion<ocupacion && !encontrado){
+            if (localizador.equals(envios[posicion].getLocalizador())){
+                devolver = posicion;
+                encontrado = true;
+            }
+            posicion++;
+        }
+        return devolver;
+    }
     /**
      * TODO: Eliminamos un envio a través del localizador pasado por parámetro
      * @param localizador
      * @return True si se ha borrado correctamente, false en cualquier otro caso
      */
     public boolean eliminarEnvio (String localizador) {
+        boolean existe = buscarEnvio(localizador)!= null;
+        if (existe) {
+            int posicion = posicionEnvio(localizador);
+            for (int i = posicion; i<ocupacion-1; i++){
+                envios[i] = envios[i+1];
+            }
 
-        return false;
+        }
+        return existe;
     }
 
     /**
@@ -84,7 +125,11 @@ public class ListaEnvios {
      * en el enunciado
      */
     public void listarEnvios() {
-
+        if (ocupacion>0) {
+            for (int i = 0; i < ocupacion; i++) {
+                System.out.println(envios[i].toString());
+            }
+        }else System.out.println("No hay envios");
     }
 
     /**
@@ -97,8 +142,15 @@ public class ListaEnvios {
      */
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         Envio envio = null;
-
-
+        String localizador;
+        do {
+            System.out.println(mensaje);
+            localizador = teclado.nextLine();
+            envio = buscarEnvio(localizador);
+            if (envio==null){
+                System.out.println("El envío con localizador: "+ localizador +"no existe.");
+            }
+        }while (envio==null);
         return envio;
     }
 
