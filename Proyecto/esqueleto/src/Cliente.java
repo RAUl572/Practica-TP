@@ -39,6 +39,13 @@ public class Cliente {
     public String toString() {
         return (getNombre()+" "+getApellidos()+", "+getEmail());
     }
+
+    /**
+     * @return String con formato de fichero .CSV
+     */
+    public String toStringCSV() {
+        return (getNombre()+";"+getApellidos()+";"+getEmail());
+    }
     // TODO: Devuelve un booleano que indica si se ha alcanzado el número máximo de envíos
     public boolean maxEnviosAlcanzado() {
         return getListaEnvios().estaLlena();
