@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ import java.util.Scanner;
  */
 public class Porte {
     private boolean[][] huecos;
+    private int numHuecos;
     private String id;
     private Nave nave;
     private PuertoEspacial origen;
@@ -47,7 +49,7 @@ public class Porte {
         this.llegada = llegada;
         this.precio = precio;
         huecos = new boolean[nave.getFilas()][nave.getColumnas()];
-
+        numHuecos=0;
     }
     public String getID() {
         return id;
@@ -77,12 +79,9 @@ public class Porte {
         return precio;
     }
     // TODO: Devuelve el número de huecos libres que hay en el porte
-    public int numHuecosLibres() {
-    }
+    public int numHuecosLibres() {return (huecos.length-numHuecos);}
     // TODO: ¿Están llenos todos los huecos?
-    public boolean porteLleno() {
-
-    }
+    public boolean porteLleno() {return (huecos.length==numHuecos);}
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
         return huecos[fila-1][columna-1];
@@ -98,10 +97,7 @@ public class Porte {
      * @param columna
      * @return el objeto Envio que corresponde, o null si está libre o se excede en el límite de fila y columna
      */
-    public Envio buscarEnvio(int fila, int columna) {
-
-        return null;
-    }
+    public Envio buscarEnvio(int fila, int columna) {return listaEnvios.buscarEnvio(getID(),fila,columna);}
 
 
     /**
@@ -111,6 +107,7 @@ public class Porte {
      * @return
      */
     public boolean ocuparHueco(Envio envio) {
+        numHuecos++;
         return huecos[envio.getFila()][envio.getColumna()]=true;
     }
 
@@ -179,10 +176,24 @@ public class Porte {
     public boolean generarListaEnvios(String fichero) {
         PrintWriter pw = null;
         try {
-
+            pw = new PrintWriter(fichero);
+            for (int i = 0;i< listaEnvios.getOcupacion();i++) {
+                pw.write(listaEnvios.getEnvio(i).getLocalizador()+";"+
+                        getID()+";" +
+                        listaEnvios.getEnvio(i).getCliente().getEmail()+";"+
+                        listaEnvios.getEnvio(i).getFila()+";"+
+                        listaEnvios.getEnvio(i).getColumna()+";"+
+                        listaEnvios.getEnvio(i).getPrecio()+"\n"
+                );
+            }
             return true;
         } catch (FileNotFoundException e) {
             return false;
+        }finally {
+                if (pw!=null){
+                    pw.flush();
+                    pw.close();
+                }
         }
     }
 
@@ -216,7 +227,26 @@ public class Porte {
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
                                   ListaPortes portes) {
-
-        return null;
+        String matricula, codigoOrigen, codigoDestino, muelle, terminal;
+        boolean continuar;
+        while(puertosEspaciales.buscarPuertoEspacial(codigoOrigen=Utilidades.leerCadena(teclado,"Ingrese código de puerto Origen:"))==null){
+            System.out.println("Código de puerto no encontrado.");
+        }
+        Utilidades.leerNumero(teclado,"Ingrese el muelle de Origen (1 - 4):",1,4);
+        while(puertosEspaciales.buscarPuertoEspacial(codigoDestino=Utilidades.leerCadena(teclado,"Ingrese código de puerto Destino:"))==null){
+            System.out.println("Código de puerto no encontrado.");
+        }
+        Utilidades.leerNumero(teclado,"Ingrese Terminal Destino (1 - 6): ",1,6);
+        do {
+            continuar = false;
+            matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
+            if (naves.buscarNave(matricula)==null){System.out.println("Matrícula de avión no encontrada");continuar = true;}
+            if (naves.buscarNave(matricula).getAlcance()<puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino))){
+                System.out.println("Avión seleccionado con alcance insuficiente.");
+                continuar=true;
+            }
+        }while (continuar);
+        //Falta inicializar fecha
+        return = new Porte();
     }
 }
