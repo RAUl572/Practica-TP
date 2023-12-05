@@ -4,35 +4,60 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * La clase ListaNaves almacena un número determinado de naves. Se puede usar para ver las naves que hay en los muelles de los puertos
+ * o a la hora de hacer pedidos ver las naves disponibles.
  *
- * @author
- * @author
+ * @author Raúl Fernández Iglesias.
+ * @author Noel López Losada.
  * @version     1.0
  */
 public class ListaNaves {
+    /**
+     * Array que contiene las naves de la lista.
+     */
     private Nave[] naves;
+    /**
+     * Número de naves que tiene la lista.
+     */
     private int ocupacion;
+    /**
+     * Capacidad máxima de la lista.
+     */
     private final int CAPACIDAD;
 
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
-     * @param capacidad
+     * @param capacidad La capacidad de la lista que se va a iniciar.
      */
     public ListaNaves(int capacidad) {
         naves = new Nave[capacidad];
         ocupacion = 0;
         CAPACIDAD = capacidad;
     }
+
+    /**
+     * @return Devuelve el número de naves de la lista.
+     */
     // TODO: Devuelve el número de naves que hay en la lista
     public int getOcupacion() {
         return ocupacion;
     }
+
+    /**
+     * Boolean que comprueba si la lista está llena
+     * @return Devuelve la última posición de la lista, true si contiene una nave, false si no contiene una nave.
+     */
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
         return  naves[CAPACIDAD-1]!=null;
     }
+
+    /**
+     * Da una nave dado un indice.
+     * @param posicion Indice de la nave que se quiere recibir.
+     * @return Nave que en la lista está en la posición deseada.
+     */
     // TODO: Devuelve nave dado un indice
     public Nave getNave(int posicion) {
         return naves[posicion];
@@ -40,7 +65,7 @@ public class ListaNaves {
 
     /**
      * TODO: insertamos una nueva nave en la lista
-     * @param nave
+     * @param nave Nave que se va a introducir en la lista.
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
     public boolean insertarNave(Nave nave) {
@@ -53,7 +78,7 @@ public class ListaNaves {
     }
     /**
      * TODO: Buscamos la nave a partir de la matricula pasada como parámetro
-     * @param matricula
+     * @param matricula Matricula que se va a buscar en las naves de la lista.
      * @return la nave que encontramos o null si no existe
      */
     public Nave buscarNave(String matricula) {
@@ -72,6 +97,10 @@ public class ListaNaves {
         }
         return buscada;
     }
+
+    /**
+     * Muestra las naves que ha en la lista si no está vacía.
+     */
     // TODO: Muestra por pantalla las naves de la lista con el formato indicado en el enunciado
     public void mostrarNaves() {
         if (ocupacion>0) {
@@ -85,10 +114,10 @@ public class ListaNaves {
      *  mayor o igual que el pasado como argumento, usando el mensaje pasado como argumento para la solicitud y
      *  siguiendo el orden y los textos mostrados en el enunciado.
      *  La función solicita repetidamente la matrícula de la nave hasta que se introduzca una con alcance suficiente
-     * @param teclado
-     * @param mensaje
-     * @param alcance
-     * @return
+     * @param teclado Scanner que lee lo que introduce el usuario.
+     * @param mensaje Instrucciones de lo que se quiere que se introduzca.
+     * @param alcance Alcance que se necesita que tenga la nave.
+     * @return La nave con la matricula introducida y que tiene un alcance igual o superior al necesario.
      */
     public Nave seleccionarNave(Scanner teclado, String mensaje, double alcance) {
         Nave nave = null;
@@ -106,8 +135,8 @@ public class ListaNaves {
 
     /**
      * TODO: Genera un fichero CSV con la lista de Naves, SOBREESCRIBIÉNDOLO
-     * @param nombre
-     * @return
+     * @param nombre Nombre del fichero en el que se va a generar el fichero CSV de la lista
+     * @return True si el proceso se ejecuta correctamente, false si hay algún error.
      */
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw = null;
@@ -129,9 +158,9 @@ public class ListaNaves {
 
     /**
      * TODO: Genera una lista de naves a partir del fichero CSV, usando el argumento como capacidad máxima de la lista
-     * @param fichero
-     * @param capacidad
-     * @return
+     * @param fichero Nombre del fichero CSV del que se van a leer las naves.
+     * @param capacidad Número de naves en el fichero.
+     * @return True si el proceso se ejecuta correctamente, false si hay algún error.
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
         ListaNaves listaNaves = new ListaNaves(capacidad);
