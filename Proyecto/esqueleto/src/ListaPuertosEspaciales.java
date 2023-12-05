@@ -26,10 +26,11 @@ public class ListaPuertosEspaciales {
     private final int CAPACIDAD;
 
     /**
-     * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
-     *
+     * Constructor de la clase, inicia la lista para una capacidad, la cual guarda en el atributo CAPACIDAD
+     * y inicia la ocupacion a 0.
      * @param capacidad indica el número de puertos espaciales que hay.
      */
+    //TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
     public ListaPuertosEspaciales(int capacidad) {
         lista = new PuertoEspacial[capacidad];
         ocupacion = 0;

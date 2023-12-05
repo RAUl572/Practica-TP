@@ -26,10 +26,12 @@ public class ListaNaves {
     private final int CAPACIDAD;
 
     /**
-     * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
+     * Constructor de la clase, inicia la lista para una capacidad, la cual guarda en el atributo CAPACIDAD
+     * y inicia la ocupacion a 0.
      *
      * @param capacidad La capacidad de la lista que se va a iniciar.
      */
+    //TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
     public ListaNaves(int capacidad) {
         naves = new Nave[capacidad];
         ocupacion = 0;
