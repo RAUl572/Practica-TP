@@ -111,7 +111,8 @@ public class Nave {
     }
 
     /**
-     * @return
+     * Crea un string con el formato que se usa en los ficheros .csv
+     * @return ejemplor del formato: "Planet Express;One;EP-245732X;8;5;1.57"
      */
     public String toStringCsv() {
         return getMarca()+";"+getModelo()+";"+getMatricula()+";"+getFilas()+";"+getColumnas()+";"+getAlcance();

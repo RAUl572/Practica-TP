@@ -134,7 +134,8 @@ public class PuertoEspacial {
     }
 
     /**
-     * @return
+     * Crea un string con el formato que se usa en los ficheros .csv
+     * @return ejemplor del formato: "Gaia Galactic Terminal;GGT;1.0;90.0;0.0;8"
      */
     public String toStringCsv() {
         return getNombre() + ";" + getCodigo() + ";" + getRadio() + ";" + getAzimut() + ";" + getPolar() + ";" + getMuelles();
