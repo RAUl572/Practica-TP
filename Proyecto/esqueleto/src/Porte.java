@@ -227,26 +227,46 @@ public class Porte {
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
                                   ListaPortes portes) {
-        String matricula, codigoOrigen, codigoDestino, muelle, terminal;
-        boolean continuar;
-        while(puertosEspaciales.buscarPuertoEspacial(codigoOrigen=Utilidades.leerCadena(teclado,"Ingrese código de puerto Origen:"))==null){
-            System.out.println("Código de puerto no encontrado.");
-        }
-        Utilidades.leerNumero(teclado,"Ingrese el muelle de Origen (1 - 4):",1,4);
-        while(puertosEspaciales.buscarPuertoEspacial(codigoDestino=Utilidades.leerCadena(teclado,"Ingrese código de puerto Destino:"))==null){
-            System.out.println("Código de puerto no encontrado.");
-        }
-        Utilidades.leerNumero(teclado,"Ingrese Terminal Destino (1 - 6): ",1,6);
-        do {
-            continuar = false;
-            matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
-            if (naves.buscarNave(matricula)==null){System.out.println("Matrícula de avión no encontrada");continuar = true;}
-            if (naves.buscarNave(matricula).getAlcance()<puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino))){
-                System.out.println("Avión seleccionado con alcance insuficiente.");
-                continuar=true;
+        String matricula, codigoOrigen, codigoDestino;
+        int muelle, terminal, precio;
+        Fecha salida, llegada;
+        Porte nuevoPorte;
+        boolean bucle;
+        if (!portes.estaLlena()){
+            while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:")) == null) {
+                System.out.println("Código de puerto no encontrado.");
             }
-        }while (continuar);
-        //Falta inicializar fecha
-        return = new Porte();
+            muelle = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - 4):", 1, 4);
+            while (puertosEspaciales.buscarPuertoEspacial(codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino:")) == null) {
+                System.out.println("Código de puerto no encontrado.");
+            }
+            terminal = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - 6): ", 1, 6);
+            do {
+                bucle = false;
+                matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
+                if (naves.buscarNave(matricula) == null) {
+                    System.out.println("Matrícula de avión no encontrada");
+                    bucle = true;
+                }
+                if (naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino))) {
+                    System.out.println("Avión seleccionado con alcance insuficiente.");
+                    bucle = true;
+                }
+            } while (bucle);
+            salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
+            do {
+                llegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada: ");
+                if (llegada.anterior(salida)) {
+                    System.out.println("La llegada debe ser posterior a la salida");
+                }
+            } while (llegada.anterior(salida));
+            //obtener min y max precio
+            precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, 200);
+            if (portes.insertarPorte(nuevoPorte = new Porte(generarID(rand),naves.buscarNave(matricula),
+                                    puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
+                                    muelle,salida,puertosEspaciales.buscarPuertoEspacial(codigoDestino),terminal,llegada,precio)))
+            {System.out.println("Porte "+nuevoPorte.getID()+" creado correctamente");}
+            return nuevoPorte;
+        }else {System.out.println("Lista de portes llena");return null;}
     }
 }
