@@ -20,20 +20,15 @@ public class ListaClientes {
      * Número de clientes que contiene la lista.
      */
     private int ocupacion;
-    /**
-     * Ocupación máxima de la lista
-     */
-    private final int CAPACIDAD;
 
     /**
-     * Constructor de la clase, inicia la lista a una capacidad dada que se guarda en la constante CAPACIDAD e inicia la ocupación a 0.
+     * Constructor de la clase, inicia la lista a una capacidad determinada e inicia la ocupación a 0.
      * @param capacidad Capacidad de clientes que va a tener la lista.
      */
     //TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
     public ListaClientes(int capacidad) {
         clientes = new Cliente[capacidad];
         ocupacion = 0;
-        CAPACIDAD = capacidad;
     }
 
     /**
@@ -51,7 +46,7 @@ public class ListaClientes {
      */
     // TODO: ¿Está llena la lista de clientes?
     public boolean estaLlena() {
-        return clientes[CAPACIDAD-1]!=null;
+        return clientes[clientes.length-1]!=null;
     }
 
     /**

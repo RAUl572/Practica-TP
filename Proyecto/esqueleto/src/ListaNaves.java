@@ -20,14 +20,10 @@ public class ListaNaves {
      * Número de naves que tiene la lista.
      */
     private int ocupacion;
-    /**
-     * Capacidad máxima de la lista.
-     */
-    private final int CAPACIDAD;
+
 
     /**
-     * Constructor de la clase, inicia la lista para una capacidad, la cual guarda en el atributo CAPACIDAD
-     * y inicia la ocupacion a 0.
+     * Constructor de la clase, inicia la lista para una capacidad e inicia la ocupacion a 0.
      *
      * @param capacidad La capacidad de la lista que se va a iniciar.
      */
@@ -35,7 +31,6 @@ public class ListaNaves {
     public ListaNaves(int capacidad) {
         naves = new Nave[capacidad];
         ocupacion = 0;
-        CAPACIDAD = capacidad;
     }
 
     /**
@@ -52,7 +47,7 @@ public class ListaNaves {
      */
     // TODO: ¿Está llena la lista de naves?
     public boolean estaLlena() {
-        return  naves[CAPACIDAD-1]!=null;
+        return  naves[naves.length-1]!=null;
     }
 
     /**

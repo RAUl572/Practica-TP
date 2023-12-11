@@ -18,12 +18,9 @@ public class ListaEnvios {
      * Número de envios que contiene la lista.
      */
     private int ocupacion;
+
     /**
-     * Número de envios máximo que puede contener la lista.
-     */
-    private final int CAPACIDAD;
-    /**
-     * EL constructor de la clase, la inicia dada una capacidad la cual se guarda en la constante CAPACIDAD.
+     * EL constructor de la clase, la inicia dada una capacidad.
      * Además inicia la ocupación de la lista a 0 ya que está vacía.
      *
      * @param capacidad Número máximo de envios de la lista.
@@ -32,7 +29,6 @@ public class ListaEnvios {
     public ListaEnvios(int capacidad) {
 		envios = new Envio[capacidad];
         ocupacion = 0;
-        CAPACIDAD = capacidad;
     }
 
     /**
@@ -50,7 +46,7 @@ public class ListaEnvios {
      */
     // TODO: ¿Está llena la lista de envíos?
     public boolean estaLlena() {
-        return envios[CAPACIDAD-1]!=null;
+        return envios[envios.length-1]!=null;
     }
 
     /**

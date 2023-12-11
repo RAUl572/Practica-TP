@@ -20,21 +20,16 @@ public class ListaPuertosEspaciales {
      */
     private int ocupacion;
 
-    /**
-     * Número de puertos que se pueden almacenar en la lista.
-     */
-    private final int CAPACIDAD;
+
 
     /**
-     * Constructor de la clase, inicia la lista para una capacidad, la cual guarda en el atributo CAPACIDAD
-     * y inicia la ocupacion a 0.
+     * Constructor de la clase, inicia la lista para una capacidad e inicia la ocupacion a 0.
      * @param capacidad indica el número de puertos espaciales que hay.
      */
     //TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
     public ListaPuertosEspaciales(int capacidad) {
         lista = new PuertoEspacial[capacidad];
         ocupacion = 0;
-        CAPACIDAD = capacidad;
     }
 
     /**
@@ -52,7 +47,7 @@ public class ListaPuertosEspaciales {
      */
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-        return lista[CAPACIDAD-1]!=null;
+        return lista[lista.length-1]!=null;
     }
 
     /**
