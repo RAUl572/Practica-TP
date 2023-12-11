@@ -11,23 +11,24 @@ import java.util.Scanner;
  */
 public class ListaPortes {
     private Porte[] portes;
+    private int ocupacion;
+
     /**
      * TODO: Constructor de la clase para inicializar la lista a una capacidad determinada
      *
      * @param capacidad
      */
     public ListaPortes(int capacidad) {
-        
-		
-		
+        portes = new Porte[capacidad];
+        ocupacion = 0;
     }
     // TODO: Devuelve el número de portes que hay en la lista
     public int getOcupacion() {
-
+        return ocupacion;
     }
     // TODO: ¿Está llena la lista?
     public boolean estaLlena() {
-
+        return  portes[portes.length-1]!=null;
     }
 
 	//TODO: devuelve un porte dado un indice
