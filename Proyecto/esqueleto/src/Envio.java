@@ -160,19 +160,13 @@ public class Envio {
         int x,fila, columna;
         try {
             do {
-                repetir=false;
-                x = Utilidades.leerNumero(teclado,"Contaratar envío como cliente ya registrado (1) o como nuevo cliente (2): ",1,2);
-                //Apañar ListaClientes
-                if (x==2){
-                    cliente = Cliente.altaCliente(teclado,new ListaClientes(1),((porte.getNave().getFilas())*(porte.getNave().getColumnas())));
-                }
                 if ((!porte.porteLleno())){
                     porte.imprimirMatrizHuecos();
                     do {
                         fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
-                        columna = Utilidades.leerNumero(teclado,"Seleccione una columna: ",1,porte.getNave().getColumnas());
+                        columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
                     } while (porte.huecoOcupado(fila, columna));
-                    return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,columna,porte.getPrecio());
+                    return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
                 }else {System.out.println("Porte lleno");return null;}
             }while (repetir);
         }catch(IOException ex){repetir = true;}
