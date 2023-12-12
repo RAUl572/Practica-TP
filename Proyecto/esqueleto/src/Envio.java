@@ -159,16 +159,14 @@ public class Envio {
         boolean repetir;
         int x,fila, columna;
         try {
-            do {
-                if ((!porte.porteLleno())){
-                    porte.imprimirMatrizHuecos();
-                    do {
-                        fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
-                        columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
-                    } while (porte.huecoOcupado(fila, columna));
-                    return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
-                }else {System.out.println("Porte lleno");return null;}
-            }while (repetir);
+            if ((!porte.porteLleno())){
+                porte.imprimirMatrizHuecos();
+                do {
+                    fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
+                    columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
+                } while (porte.huecoOcupado(fila, (Integer.parseInt(String.valueOf(columna)))));
+                return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
+            }else {System.out.println("Porte lleno");return null;}
         }catch(IOException ex){repetir = true;}
         return null;
     }
