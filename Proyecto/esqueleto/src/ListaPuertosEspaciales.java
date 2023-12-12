@@ -104,7 +104,7 @@ public class ListaPuertosEspaciales {
      * @return El puerto espacial con código igual al introducido.
      */
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
-        PuertoEspacial puertoEspacial = null;
+        PuertoEspacial puertoEspacial;
         do {
             System.out.println(mensaje);
             String codigo = teclado.nextLine();
