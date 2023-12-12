@@ -118,6 +118,7 @@ public class Porte {
      * @return
      */
     public boolean desocuparHueco(String localizador) {
+        numHuecos--;
         return huecos[buscarEnvio(localizador).getFila()][buscarEnvio(localizador).getColumna()]=false;
     }
 
@@ -127,7 +128,8 @@ public class Porte {
      *  Cidonia(CID) M1 (01/01/2024 11:00:05) en Planet Express One(EP-245732X) por 13424,56 SSD, huecos libres: 10"
      */
     public String toString() {
-        return "";
+        return String.format("Porte %s de %s a %s en %s por %f SSD, huecos libres: %d",
+                                getID(),getOrigen().toString(),getDestino().toString(),getNave().toString(),getPrecio(),numHuecosLibres());
     }
 
     /**
@@ -135,9 +137,8 @@ public class Porte {
      * @return ejemplo del formato -> "Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05)"
      */
     public String toStringSimple() {
-        return ("Porte"+getID()+
-                "de "
-                );
+        return String.format("Porte %s de %s a %s",
+                getID(),getOrigen().toString(),getDestino().toString());
     }
 
 
@@ -149,7 +150,7 @@ public class Porte {
      * @return
      */
     public boolean coincide(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        return ;
+        return ((codigoOrigen.equals(this.getOrigen().getCodigo()))&&(codigoDestino.equals(this.getDestino().getCodigo()))&&(fecha==this.getLlegada()));
     }
 
 
@@ -163,8 +164,18 @@ public class Porte {
      *     10[ ][ ][ ]
      */
     public void imprimirMatrizHuecos() {
-        System.out.print("  ");
-
+        for (int j=0;j<huecos[0].length;j++){System.out.println("   "+(char)(64+j));}
+        for (int i = 0;i<huecos.length;i++){
+            System.out.println(" "+i);
+            for (int j = 0;j<huecos[i].length;j++){
+                if (huecos[i][j]){
+                    System.out.println("[X] ");
+                }else {
+                    System.out.println("[ ] " );
+                }
+            }
+            System.out.println("\n");
+        }
     }
 
     /**

@@ -1,5 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -43,7 +42,7 @@ public class ListaPortes {
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
-
+        if (!estaLlena()){portes[getOcupacion()-1]=porte;ocupacion++;return true;}
         return false;
     }
 
@@ -54,7 +53,9 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
-
+        for (int i = 0;i<getOcupacion();i++){
+            if (portes[i].getID().equals(id)){return portes[i];}
+        }
         return null;
     }
 
@@ -67,8 +68,13 @@ public class ListaPortes {
      * @return
      */
     public ListaPortes buscarPortes(String codigoOrigen, String codigoDestino, Fecha fecha) {
-        
-
+        ListaPortes listaPortes=new ListaPortes(this.getOcupacion());
+        for (int i = 0;i<getOcupacion();i++){
+            if ((portes[i].getOrigen().getCodigo().equals(codigoOrigen))&&
+                    (portes[i].getDestino().getCodigo().equals(codigoDestino))&&
+                    (portes[i].getLlegada()==fecha))
+            {listaPortes.insertarPorte(portes[i]);}
+        }
         return listaPortes;
     }
 
@@ -76,7 +82,7 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-
+        for (int i=0;i<getOcupacion();i++) {System.out.println(portes[i].toString());}
     }
 
 
@@ -92,8 +98,13 @@ public class ListaPortes {
      */
     public Porte seleccionarPorte(Scanner teclado, String mensaje, String cancelar) {
         listarPortes();
-        Porte porte = null;
-
+        Porte porte;
+        String id;
+        if ((id = Utilidades.leerCadena(teclado,mensaje)).equals((porte = buscarPorte(id)).getID())){
+            return porte;
+        } else if ((id.equals(cancelar))){
+            return null;
+        }
         return porte;
     }
 
@@ -104,12 +115,27 @@ public class ListaPortes {
      * @return
      */
     public boolean escribirPortesCsv(String fichero) {
+        BufferedWriter out = null;
         try {
-
+            out = new BufferedWriter(new FileWriter(fichero));
+            for (int i=0;i<getOcupacion();i++) {
+                Porte aux = portes[i];
+                out.write(String.format("%s;%s;%s;%d;%s;%s;%d;%s;%f",
+                        aux.getID(),aux.getNave().getMatricula(),aux.getOrigen().getCodigo(),aux.getMuelleOrigen(),
+                        aux.getSalida().toString(),aux.getDestino().getCodigo(),aux.getMuelleDestino(),
+                        aux.getLlegada().toString(),aux.getPrecio())
+                );
+            }
             return true;
         } catch (FileNotFoundException e) {
             return false;
+        }catch (IOException ex){
+            System.out.println(ex.getMessage());
+        }finally {
+            try{if (out!=null){out.flush();out.close();}}
+            catch(IOException ex){System.out.println(ex.getMessage());}
         }
+        return false;
     }
 
     /**
@@ -123,10 +149,29 @@ public class ListaPortes {
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
         ListaPortes listaPortes = new ListaPortes(capacidad);
+        BufferedReader in=null;
         try {
-
+            in = new BufferedReader(new FileReader(fichero));
+            String[] porte;
+            while(in.readLine()==null){
+                porte = in.readLine().split(";");
+                listaPortes.insertarPorte(new Porte(
+                                            porte[0],
+                                            naves.buscarNave(porte[1]),
+                                            puertosEspaciales.buscarPuertoEspacial(porte[2]),
+                                            Integer.parseInt(porte[3]),
+                                            Fecha.fromString(porte[4]),
+                                            puertosEspaciales.buscarPuertoEspacial(porte[5]),
+                                            Integer.parseInt(porte[6]),
+                                            Fecha.fromString(porte[7]),
+                                            Double.parseDouble(porte[8]))
+                );
+            }
         } catch (Exception e) {
             return null;
+        }finally {
+            try{if (in!=null){in.close();}}
+            catch(Exception ex){System.out.println(ex.getMessage());}
         }
         return listaPortes;
     }
