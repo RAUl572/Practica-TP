@@ -196,8 +196,12 @@ public class PlanetExpress {
 
                     break;
                 case 2:     // TODO: Alta de Cliente
-                    cliente = Cliente.altaCliente(teclado,app.listaClientes,app.maxEnviosPorCliente);
-                    app.listaClientes.insertarCliente(cliente);
+                    if (!app.maxClientesAlcanzado()) {
+                        cliente = Cliente.altaCliente(teclado, app.listaClientes, app.maxEnviosPorCliente);
+                        if (app.insertarCliente(cliente)){
+                            System.out.println(cliente.toString()+" ha sido registrado");
+                        }
+                    }
                     break;
                 case 3:     // TODO: Buscar Porte
                     app.buscarPorte(teclado);
