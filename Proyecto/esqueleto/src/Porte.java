@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class Porte {
     private boolean[][] huecos;
-    private int numHuecos;
+    private int numHuecos; //Non default variable
     private String id;
     private Nave nave;
     private PuertoEspacial origen;
@@ -98,7 +98,6 @@ public class Porte {
      * @return el objeto Envio que corresponde, o null si está libre o se excede en el límite de fila y columna
      */
     public Envio buscarEnvio(int fila, int columna) {return listaEnvios.buscarEnvio(getID(),fila,columna);}
-
 
     /**
      * TODO: Método que Si está desocupado el hueco que indica el envio, lo pone ocupado y devuelve true,
@@ -239,7 +238,8 @@ public class Porte {
                                   ListaNaves naves,
                                   ListaPortes portes) {
         String matricula, codigoOrigen, codigoDestino;
-        int muelle, terminal, precio;
+        int muelle, terminal;
+        double precio;
         Fecha salida, llegada;
         Porte nuevoPorte;
         boolean bucle;
@@ -271,8 +271,7 @@ public class Porte {
                     System.out.println("La llegada debe ser posterior a la salida");
                 }
             } while (llegada.anterior(salida));
-            //obtener min y max precio
-            precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, 200);
+            precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0,Double.MAX_VALUE);
             if (portes.insertarPorte(nuevoPorte = new Porte(generarID(rand),naves.buscarNave(matricula),
                                     puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
                                     muelle,salida,puertosEspaciales.buscarPuertoEspacial(codigoDestino),terminal,llegada,precio)))
