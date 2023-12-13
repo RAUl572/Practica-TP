@@ -153,7 +153,7 @@ public class ListaPortes {
         try {
             in = new BufferedReader(new FileReader(fichero));
             String[] porte;
-            while(in.readLine()==null){
+            while(in.readLine()!=null){
                 porte = in.readLine().split(";");
                 listaPortes.insertarPorte(new Porte(
                                             porte[0],
