@@ -156,18 +156,14 @@ public class Envio {
      * @return Envio para el porte y cliente especificados
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
-        boolean repetir;
-        int x,fila, columna;
-        try {
-            if ((!porte.porteLleno())){
-                porte.imprimirMatrizHuecos();
-                do {
-                    fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
-                    columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
-                } while (porte.huecoOcupado(fila, (Integer.parseInt(String.valueOf(columna)))));
-                return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
-            }else {System.out.println("Porte lleno");return null;}
-        }catch(IOException ex){repetir = true;}
-        return null;
+        int fila, columna;
+        if ((!porte.porteLleno())){
+            porte.imprimirMatrizHuecos();
+            do {
+                fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
+                columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
+            } while (porte.huecoOcupado(fila, (Integer.parseInt(String.valueOf(columna)))));
+            return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
+        }else {System.out.println("Porte lleno");return null;}
     }
 }

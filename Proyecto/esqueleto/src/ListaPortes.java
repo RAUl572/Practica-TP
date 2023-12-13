@@ -164,8 +164,8 @@ public class ListaPortes {
                                             puertosEspaciales.buscarPuertoEspacial(porte[5]),
                                             Integer.parseInt(porte[6]),
                                             Fecha.fromString(porte[7]),
-                                            Double.parseDouble(porte[8]))
-                );
+                                            Double.parseDouble(porte[8])
+                ));
             }
         } catch (Exception e) {
             return null;
