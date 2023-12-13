@@ -115,7 +115,7 @@ public class PlanetExpress {
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
         int opcion;
-        Cliente cliente=null;
+        Cliente cliente = null;
         String email;
         Envio contratado;
         if (porte != null) {
@@ -125,11 +125,11 @@ public class PlanetExpress {
             if (opcion==2){
                 cliente = Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
                 listaClientes.insertarCliente(cliente);
-            } else if (opcion == 1){
+            } else {
                 do {
                     email = Utilidades.leerCadena(teclado,"Introduzca su email");
                 }while (!Cliente.correctoEmail(email));
-                cliente = listaClientes.buscarClienteEmail(email);
+                cliente = listaClientes.buscarClienteEmail("email");
             }
             contratado = Envio.altaEnvio(teclado,rand,porte,cliente);
             cliente.aniadirEnvio(contratado);
@@ -176,6 +176,8 @@ public class PlanetExpress {
     public static void main(String[] args) {
         PlanetExpress app;
         Scanner teclado = new Scanner(System.in);
+        Cliente cliente;
+        Porte porte;
         int opcion;
         if (args.length != 10) {
             System.out.println("Número de argumentos incorrecto");
@@ -194,17 +196,19 @@ public class PlanetExpress {
 
                     break;
                 case 2:     // TODO: Alta de Cliente
-
-
+                    cliente = Cliente.altaCliente(teclado,app.listaClientes,app.maxEnviosPorCliente);
+                    app.listaClientes.insertarCliente(cliente);
                     break;
                 case 3:     // TODO: Buscar Porte
                     app.buscarPorte(teclado);
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
-
+                    cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envios");
+                    cliente.listarEnvios();
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
-
+                    porte = app.listaPortes.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver","CANCELAR");
+                    porte.getListaEnvios().listarEnvios();
 
                     break;
             }

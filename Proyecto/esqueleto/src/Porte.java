@@ -49,7 +49,12 @@ public class Porte {
         this.llegada = llegada;
         this.precio = precio;
         huecos = new boolean[nave.getFilas()][nave.getColumnas()];
+        listaEnvios = new ListaEnvios(nave.getFilas()* nave.getColumnas());
         numHuecos=0;
+    }
+
+    public ListaEnvios getListaEnvios() {
+        return listaEnvios;
     }
     public String getID() {
         return id;
@@ -84,7 +89,7 @@ public class Porte {
     public boolean porteLleno() {return (huecos.length==numHuecos);}
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
-        return huecos[fila-1][columna-1];
+        return  huecos[fila - 1][columna - 1] ;
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
@@ -107,7 +112,11 @@ public class Porte {
      * @return
      */
     public boolean ocuparHueco(Envio envio) {
-        numHuecos++;
+        boolean libre = !huecoOcupado(envio.getFila(),envio.getColumna());
+        if (libre){
+            listaEnvios.insertarEnvio(envio);
+            numHuecos++;
+        }
         return huecos[envio.getFila()][envio.getColumna()]=true;
     }
 
