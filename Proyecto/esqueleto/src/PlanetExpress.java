@@ -192,8 +192,9 @@ public class PlanetExpress {
             opcion = menu(teclado);
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
-
-
+                    if((!app.maxPortesAlcanzado())&&(app.insertarPorte(porte=Porte.altaPorte(teclado,new Random(),app.listaPuertosEspaciales,app.listaNaves,app.listaPortes)))) {
+                        System.out.printf("Porte %s creado correctamente",porte.getID());
+                    }
                     break;
                 case 2:     // TODO: Alta de Cliente
                     cliente = Cliente.altaCliente(teclado,app.listaClientes,app.maxEnviosPorCliente);

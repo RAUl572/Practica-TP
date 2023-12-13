@@ -248,9 +248,9 @@ public class Porte {
                                   ListaNaves naves,
                                   ListaPortes portes) {
         String matricula, codigoOrigen, codigoDestino;
-        int muelle, terminal, precio;
+        int muelle, terminal;
+        double precio;
         Fecha salida, llegada;
-        Porte nuevoPorte;
         boolean bucle;
         if (!portes.estaLlena()){
             while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:")) == null) {
@@ -280,13 +280,10 @@ public class Porte {
                     System.out.println("La llegada debe ser posterior a la salida");
                 }
             } while (llegada.anterior(salida));
-            //obtener min y max precio
-            precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, 200);
-            if (portes.insertarPorte(nuevoPorte = new Porte(generarID(rand),naves.buscarNave(matricula),
-                                    puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
-                                    muelle,salida,puertosEspaciales.buscarPuertoEspacial(codigoDestino),terminal,llegada,precio)))
-            {System.out.println("Porte "+nuevoPorte.getID()+" creado correctamente");}
-            return nuevoPorte;
+            precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, Double.MAX_VALUE);
+            return new Porte(generarID(rand),naves.buscarNave(matricula),
+                    puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
+                    muelle,salida,puertosEspaciales.buscarPuertoEspacial(codigoDestino),terminal,llegada,precio);
         }else {System.out.println("Lista de portes llena");return null;}
     }
 }
