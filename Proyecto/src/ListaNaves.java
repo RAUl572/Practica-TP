@@ -89,9 +89,6 @@ public class ListaNaves {
             }
             indice ++;
         }
-        if (indice==ocupacion){
-            System.out.println("La nave con matrícula " + matricula + " no ha sido encontrada");
-        }
         return buscada;
     }
 
@@ -104,7 +101,7 @@ public class ListaNaves {
             for (int i = 0; i < ocupacion; i++) {
                 System.out.println(naves[i].toString());
             }
-        }else System.out.println("No hay naves");
+        }
     }
     /**
      * TODO: Permite seleccionar una nave existente a partir de su matrícula, y comprueba si dispone de un alcance

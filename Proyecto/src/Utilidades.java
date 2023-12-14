@@ -41,11 +41,7 @@ public class Utilidades {
         long numero;
         System.out.println(mensaje);
         do {
-            System.out.println("Introduce un número menor que "+ maximo+ " y mayor que "+minimo+": ");
             numero = teclado.nextLong();
-            if (numero<minimo || numero>maximo){
-                System.out.println("Numero incorrecto");
-            }
         }while (numero<minimo || numero>maximo);
         return numero;
     }
@@ -62,11 +58,7 @@ public class Utilidades {
         double numero;
         System.out.println(mensaje);
         do {
-            System.out.println("Introduce un número menor que "+ maximo+ " y mayor que "+minimo+": ");
             numero = teclado.nextDouble();
-            if (numero<minimo || numero>maximo){
-                System.out.println("Numero incorrecto");
-            }
         }while (numero<minimo || numero>maximo);
         return numero;
     }
@@ -83,11 +75,7 @@ public class Utilidades {
         char letra;
         System.out.println(mensaje);
         do {
-            System.out.println("Introduce un caracter entre "+ maximo + " y "+minimo+": ");
             letra = teclado.next().charAt(0);
-            if (letra<minimo || letra>maximo){
-                System.out.println("Caracter incorrecto");
-            }
         }while (letra<minimo || letra>maximo);
         return letra;
     }
@@ -100,11 +88,12 @@ public class Utilidades {
      * @return Fecha nueva fecha correcta creada.
      */
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
-        int dia=0;
-        int mes=0;
-        int anio=0;
+        int dia;
+        int mes;
+        int anio;
         System.out.println(mensaje);
         do {
+            dia = mes = anio = 0;
             while (dia<1 || dia> 31){
             System.out.print("Introduce el día: ");
             dia = teclado.nextInt();
@@ -116,10 +105,6 @@ public class Utilidades {
             while (anio<1900){
                 System.out.print("Introduce el año: ");
                 anio = teclado.nextInt();
-            }
-            if (!Fecha.comprobarFecha(dia,mes,anio)){
-                System.out.println("Fecha incorrecta ");
-                dia = mes = anio =0;
             }
         }while(!Fecha.comprobarFecha(dia,mes,anio));
         return new Fecha(dia, mes, anio);
@@ -133,14 +118,15 @@ public class Utilidades {
      * @return Fecha nueva fecha con hora correcta.
      */
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
-        int dia=0;
-        int mes=0;
-        int anio=0;
+        int dia;
+        int mes;
+        int anio;
         int hora;
         int minuto;
         int segundo;
         System.out.println(mensaje);
         do {
+            dia = mes = anio =0;
             while (dia<1 || dia> 31){
                 System.out.print("Introduce el día: ");
                 dia = teclado.nextInt();
@@ -153,10 +139,6 @@ public class Utilidades {
                 System.out.print("Introduce el año: ");
                 anio = teclado.nextInt();
             }
-            if (!Fecha.comprobarFecha(dia,mes,anio)){
-                System.out.println("Fecha incorrecta ");
-                dia = mes = anio =0;
-            }
         }while(!Fecha.comprobarFecha(dia,mes,anio));
         do {
                 System.out.print("Introduce la hora: ");
@@ -165,9 +147,6 @@ public class Utilidades {
                 minuto = teclado.nextInt();
                 System.out.print("Introduce los segundos: ");
                 segundo = teclado.nextInt();
-            if (!Fecha.comprobarHora(hora,minuto,segundo)){
-                System.out.println("Hora incorrecta ");
-            }
         }while(!Fecha.comprobarHora(hora,minuto,segundo));
 
 

@@ -110,9 +110,6 @@ public class ListaClientes {
             System.out.println(mensaje);
             email = teclado.nextLine();
             cliente = buscarClienteEmail(email);
-            if (cliente==null){
-                System.out.println("El cliente con email : "+ email +"no existe.");
-            }
         }while (cliente==null);
         return cliente;
     }
