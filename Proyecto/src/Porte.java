@@ -265,6 +265,7 @@ public class Porte {
             do {
                 bucle = false;
                 matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
+                //juntar condiciones
                 if (naves.buscarNave(matricula) == null) {
                     bucle = true;
                 }
