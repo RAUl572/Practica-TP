@@ -266,7 +266,6 @@ public class Porte {
                 bucle = false;
                 matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
                 if (naves.buscarNave(matricula) == null) {
-                    System.out.println("Matrícula de avión no encontrada");
                     bucle = true;
                 }
                 if (naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino))) {

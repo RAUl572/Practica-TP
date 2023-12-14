@@ -90,9 +90,6 @@ public class ListaPuertosEspaciales {
             }
             indice ++;
         }
-        if (indice==ocupacion){
-            System.out.println("El puerto con código " + codigo + " no ha sido encontrado");
-        }
         return buscado;
     }
     /**
