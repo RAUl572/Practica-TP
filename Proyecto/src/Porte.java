@@ -269,11 +269,13 @@ public class Porte {
                 matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
                 //juntar condiciones
                 if (naves.buscarNave(matricula) == null) {
+                    System.out.println("Matrícula no encontrada");
                     bucle = true;
-                }
-                if (naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino))) {
+                }else{
+                    if (naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino))) {
                     System.out.println("Avión seleccionado con alcance insuficiente.");
                     bucle = true;
+                }
                 }
             } while (bucle);
             salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
@@ -283,7 +285,6 @@ public class Porte {
                     System.out.println("La llegada debe ser posterior a la salida");
                 }
             } while (llegada.anterior(salida));
-            //obtener min y max precio
             precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, Double.MAX_VALUE);
             if (portes.insertarPorte(nuevoPorte = new Porte(generarID(rand),naves.buscarNave(matricula),
                                     puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
