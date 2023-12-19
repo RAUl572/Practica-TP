@@ -267,15 +267,15 @@ public class Porte {
             do {
                 bucle = false;
                 matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
-                //juntar condiciones
                 if (naves.buscarNave(matricula) == null) {
                     System.out.println("Matrícula no encontrada");
                     bucle = true;
                 }else{
+                    // verificar condición, considera 6.66846E-4 menor que 0.613
                     if (naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino))) {
-                    System.out.println("Avión seleccionado con alcance insuficiente.");
-                    bucle = true;
-                }
+                        System.out.println("Avión seleccionado con alcance insuficiente.");
+                        bucle = true;
+                    }
                 }
             } while (bucle);
             salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
@@ -286,11 +286,9 @@ public class Porte {
                 }
             } while (llegada.anterior(salida));
             precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, Double.MAX_VALUE);
-            if (portes.insertarPorte(nuevoPorte = new Porte(generarID(rand),naves.buscarNave(matricula),
-                                    puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
-                                    muelle,salida,puertosEspaciales.buscarPuertoEspacial(codigoDestino),terminal,llegada,precio)))
-            {System.out.println("Porte "+nuevoPorte.getID()+" creado correctamente");}
-            return nuevoPorte;
+            return new Porte(generarID(rand),naves.buscarNave(matricula),
+                    puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
+                    muelle,salida,puertosEspaciales.buscarPuertoEspacial(codigoDestino),terminal,llegada,precio);
         }else {System.out.println("Lista de portes llena");return null;}
     }
 }
