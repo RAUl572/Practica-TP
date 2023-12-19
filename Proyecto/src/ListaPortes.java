@@ -42,12 +42,8 @@ public class ListaPortes {
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
-        boolean hueco = !estaLlena();
-        if (hueco){
-            portes[ocupacion]=porte;
-            ocupacion++;
-        }
-        return hueco;
+        if (!estaLlena()){portes[getOcupacion()-1]=porte;ocupacion++;return true;}
+        return false;
     }
 
 
@@ -57,13 +53,10 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
-        Porte buscado = null;
         for (int i = 0;i<getOcupacion();i++){
-            if (portes[i].getID().equals(id)){
-                return buscado=portes[i];
-            }
+            if (portes[i].getID().equals(id)){return portes[i];}
         }
-        return buscado;
+        return null;
     }
 
     /**
@@ -132,7 +125,7 @@ public class ListaPortes {
             out = new BufferedWriter(new FileWriter(fichero));
             for (int i=0;i<getOcupacion();i++) {
                 Porte aux = portes[i];
-                out.write(String.format("%s;%s;%s;%d;%s;%s;%d;%s;%f\n",
+                out.write(String.format("%s;%s;%s;%d;%s;%s;%d;%s;%f",
                         aux.getID(),aux.getNave().getMatricula(),aux.getOrigen().getCodigo(),aux.getMuelleOrigen(),
                         aux.getSalida().toString(),aux.getDestino().getCodigo(),aux.getMuelleDestino(),
                         aux.getLlegada().toString(),aux.getPrecio())
@@ -162,25 +155,22 @@ public class ListaPortes {
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
         ListaPortes listaPortes = new ListaPortes(capacidad);
         BufferedReader in=null;
-        Porte nuevo;
-        String linea;
         try {
             in = new BufferedReader(new FileReader(fichero));
             String[] porte;
-            linea=in.readLine();
-            while(linea !=null){
-                porte = linea.split(";");
-                nuevo =new Porte(porte[0],
-                        naves.buscarNave(porte[1]),
-                        puertosEspaciales.buscarPuertoEspacial(porte[2]),
-                        Integer.parseInt(porte[3]),
-                        Fecha.fromString(porte[4]),
-                        puertosEspaciales.buscarPuertoEspacial(porte[5]),
-                        Integer.parseInt(porte[6]),
-                        Fecha.fromString(porte[7]),
-                        Double.parseDouble(porte[8]));
-                listaPortes.insertarPorte(nuevo);
-                linea=in.readLine();
+            while(in.readLine()!=null){
+                porte = in.readLine().split(";");
+                listaPortes.insertarPorte(new Porte(
+                                            porte[0],
+                                            naves.buscarNave(porte[1]),
+                                            puertosEspaciales.buscarPuertoEspacial(porte[2]),
+                                            Integer.parseInt(porte[3]),
+                                            Fecha.fromString(porte[4]),
+                                            puertosEspaciales.buscarPuertoEspacial(porte[5]),
+                                            Integer.parseInt(porte[6]),
+                                            Fecha.fromString(porte[7]),
+                                            Double.parseDouble(porte[8])
+                ));
             }
         } catch (Exception e) {
             return null;
