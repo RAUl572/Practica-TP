@@ -79,6 +79,14 @@ public class Utilidades {
         }while (letra<minimo || letra>maximo);
         return letra;
     }
+    public static char leerLetraOpciones(Scanner teclado, String mensaje, char opcion1, char opcion2) {
+        char letra;
+        System.out.println(mensaje);
+        do {
+            letra = teclado.next().charAt(0);
+        }while (letra !=opcion1 && letra !=opcion2);
+        return letra;
+    }
 
 
     /**

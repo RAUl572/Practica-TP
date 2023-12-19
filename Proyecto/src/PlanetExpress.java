@@ -179,6 +179,7 @@ public class PlanetExpress {
         Cliente cliente;
         Porte porte;
         ListaPortes listaPortes1;
+        char eleccion;
         int opcion;
         if (args.length != 10) {
             System.out.println("Número de argumentos incorrecto");
@@ -207,20 +208,18 @@ public class PlanetExpress {
                     break;
                 case 3:     // TODO: Buscar Porte
                     listaPortes1 = app.buscarPorte(teclado);
+                    listaPortes1.listarPortes();
+                    porte = listaPortes1.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR");
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
                     cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envios: ");
-                    System.out.println();
-                    cliente.listarEnvios();
-                    System.out.println();
+                    cliente.getListaEnvios().seleccionarEnvio(teclado,"Seleccione un evio: ");
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
-                    porte = app.listaPortes.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR");
-                    System.out.println();
-                    if (porte!=null) {
-                        porte.getListaEnvios().listarEnvios();
-                        System.out.println();
-                    }
+                    porte = app.listaPortes.seleccionarPorte(teclado,"Selecciones el porte: ","CANCELAR");
+                    if (porte.getListaEnvios().aniadirEnviosCsv(Utilidades.leerCadena(teclado,"Nombre del fichero: "))){
+                        System.out.println("Fichero creado correctamente");
+                    }else System.out.println("Error en la escritura del fichero");
                     break;
             }
         } while (opcion != 0);
