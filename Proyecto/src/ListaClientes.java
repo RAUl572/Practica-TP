@@ -160,7 +160,7 @@ public class ListaClientes {
                 listaClientes.insertarCliente(nuevo);
             }
         } catch (FileNotFoundException e) {
-            return null;
+            System.out.println("No se ha encontrado el fichero de clientes");
         } finally {
             if (sc!=null){
                 sc.close();

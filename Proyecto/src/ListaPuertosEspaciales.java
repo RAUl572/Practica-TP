@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -152,7 +153,9 @@ public class ListaPuertosEspaciales {
                 listaPuertosEspaciales.insertarPuertoEspacial(nuevo);
             }
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero de puertos");
+        }catch (Exception e) {
             return null;
         } finally {
             if (sc!=null){

@@ -172,7 +172,9 @@ public class ListaPortes {
                                             Double.parseDouble(porte[8])
                 ));
             }
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero de portes");
+        }catch (Exception e) {
             return null;
         }finally {
             try{if (in!=null){in.close();}}

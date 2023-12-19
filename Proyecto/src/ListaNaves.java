@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -169,7 +170,9 @@ public class ListaNaves {
                 listaNaves.insertarNave(nueva);
             }
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero de naves");
+        }catch (Exception e) {
             return null;
         } finally {
             if (sc!=null){
