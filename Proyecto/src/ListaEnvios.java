@@ -184,9 +184,6 @@ public class ListaEnvios {
             System.out.println(mensaje);
             localizador = teclado.nextLine();
             envio = buscarEnvio(localizador);
-            if (envio==null){
-                System.out.println("El envío con localizador: "+ localizador +"no existe.");
-            }
         }while (envio==null);
         return envio;
     }

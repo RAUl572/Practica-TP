@@ -42,7 +42,7 @@ public class ListaPortes {
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
-        if (!estaLlena()){portes[getOcupacion()]=porte;ocupacion++;return true;}
+        if (!estaLlena()){portes[getOcupacion()-1]=porte;ocupacion++;return true;}
         return false;
     }
 

@@ -89,7 +89,7 @@ public class Porte {
     public boolean porteLleno() {return (huecos.length==numHuecos);}
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
-        return  huecos[fila - 1][columna - 1] ;
+        return  huecos[fila-1][columna-1] ;
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
@@ -116,8 +116,9 @@ public class Porte {
         if (libre){
             listaEnvios.insertarEnvio(envio);
             numHuecos++;
+            huecos[envio.getFila()-1][envio.getColumna()-1]=true;
         }
-        return huecos[envio.getFila()][envio.getColumna()]=true;
+        return libre;
     }
 
 
@@ -137,8 +138,9 @@ public class Porte {
      *  Cidonia(CID) M1 (01/01/2024 11:00:05) en Planet Express One(EP-245732X) por 13424,56 SSD, huecos libres: 10"
      */
     public String toString() {
-        return String.format("Porte %s de %s a %s en %s por %f SSD, huecos libres: %d",
-                                getID(),getOrigen().toString(),getDestino().toString(),getNave().toString(),getPrecio(),numHuecosLibres());
+        return String.format("Porte %s de %s M%d %s a %s M%d %s en %s por %f SSD, huecos libres: %d",
+                                getID(),getOrigen().toString(),getMuelleOrigen(),getSalida(),getDestino().toString(),getMuelleDestino(),getLlegada(),
+                getNave().toString(),getPrecio(),numHuecosLibres());
     }
 
     /**
