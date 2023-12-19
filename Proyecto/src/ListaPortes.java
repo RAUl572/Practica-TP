@@ -105,12 +105,17 @@ public class ListaPortes {
      */
     public Porte seleccionarPorte(Scanner teclado, String mensaje, String cancelar) {
         listarPortes();
-        Porte porte;
+        Porte porte=null;
         String id;
-        if ((id = Utilidades.leerCadena(teclado,mensaje)).equals((porte = buscarPorte(id)).getID())){
-            return porte;
-        } else if ((id.equals(cancelar))){
-            return null;
+        boolean encontado = false;
+        while (!encontado) {
+            id = Utilidades.leerCadena(teclado, mensaje);
+            porte = buscarPorte(id);
+            if (id.equalsIgnoreCase(cancelar)) {
+                encontado = true;
+            } else if (porte != null) {
+                encontado = true;
+            }
         }
         return porte;
     }
