@@ -104,11 +104,10 @@ public class ListaClientes {
        para la solicitud y, siguiendo el orden y los textos mostrados en el enunciado.
        La función debe solicitar repetidamente hasta que se introduzca un email correcto*/
     public Cliente seleccionarCliente(Scanner teclado, String mensaje) {
-        Cliente cliente = null;
+        Cliente cliente;
         String email;
         do {
-            System.out.println(mensaje);
-            email = teclado.nextLine();
+            email = Utilidades.leerCadena(teclado,mensaje);
             cliente = buscarClienteEmail(email);
         }while (cliente==null);
         return cliente;

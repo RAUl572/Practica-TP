@@ -178,6 +178,7 @@ public class PlanetExpress {
         Scanner teclado = new Scanner(System.in);
         Cliente cliente;
         Porte porte;
+        ListaPortes listaPortes1;
         int opcion;
         if (args.length != 10) {
             System.out.println("Número de argumentos incorrecto");
@@ -205,16 +206,21 @@ public class PlanetExpress {
                     }
                     break;
                 case 3:     // TODO: Buscar Porte
-                    app.buscarPorte(teclado);
+                    listaPortes1 = app.buscarPorte(teclado);
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
-                    cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envios");
+                    cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envios: ");
+                    System.out.println();
                     cliente.listarEnvios();
+                    System.out.println();
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
-                    porte = app.listaPortes.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver","CANCELAR");
-                    porte.getListaEnvios().listarEnvios();
-
+                    porte = app.listaPortes.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR");
+                    System.out.println();
+                    if (porte!=null) {
+                        porte.getListaEnvios().listarEnvios();
+                        System.out.println();
+                    }
                     break;
             }
         } while (opcion != 0);
