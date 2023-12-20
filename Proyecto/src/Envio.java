@@ -100,7 +100,7 @@ public class Envio {
             out = new DataOutputStream(new FileOutputStream(fichero,false));
             out.writeUTF(
                     "-----------------------------------------------------\n"+
-                        "--------- Factura del envío"+getLocalizador()+"--------\n-"+
+                        "--------- Factura del envío "+getLocalizador()+"--------\n-"+
                         "-----------------------------------------------------\n"+
                         "\nPorte: "+getPorte().getID()+
                         "\nOrigen: "+getPorte().getMuelleOrigen()+

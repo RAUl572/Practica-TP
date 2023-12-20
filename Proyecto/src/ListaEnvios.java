@@ -147,6 +147,8 @@ public class ListaEnvios {
                 for (int i = posicion; i < ocupacion - 1; i++) {
                     envios[i] = envios[i + 1];
                 }
+                envios[posicion]=null;
+                ocupacion--;
             }
         }
         return existe;
@@ -181,9 +183,11 @@ public class ListaEnvios {
         Envio envio = null;
         String localizador;
         do {
-            System.out.println(mensaje);
-            localizador = teclado.nextLine();
+            localizador = Utilidades.leerCadena(teclado,mensaje);
             envio = buscarEnvio(localizador);
+            if (envio==null){
+                System.out.println("     Localizador incorrecto");
+            }
         }while (envio==null);
         return envio;
     }
@@ -237,8 +241,11 @@ public class ListaEnvios {
                 porte.ocuparHueco(envio);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("No se ha encontrado el fichero de envíos");
-        } finally {
+            System.out.println("No se ha encontrado el fichero "+ficheroEnvios);
+
+        } catch (Exception ex){
+            System.out.println("Error de lectura");
+        }finally {
             if (sc!=null){
                 sc.close();
             }
