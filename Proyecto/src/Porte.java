@@ -129,7 +129,8 @@ public class Porte {
      */
     public boolean desocuparHueco(String localizador) {
         numHuecos--;
-        return huecos[buscarEnvio(localizador).getFila()][buscarEnvio(localizador).getColumna()]=false;
+        huecos[buscarEnvio(localizador).getFila()][buscarEnvio(localizador).getColumna()] = false;
+        return !huecos[buscarEnvio(localizador).getFila()][buscarEnvio(localizador).getColumna()];
     }
 
     /**

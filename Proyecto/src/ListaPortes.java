@@ -106,7 +106,9 @@ public class ListaPortes {
             porte = buscarPorte(id);
             if (id.equalsIgnoreCase(cancelar)) {
                 encontado = true;
-            } else if (porte != null) {
+            } else if (porte == null) {
+                System.out.println("    Id de porte incorrecto");
+            }else {
                 encontado = true;
             }
         }
