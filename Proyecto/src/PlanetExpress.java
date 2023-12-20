@@ -151,7 +151,7 @@ public class PlanetExpress {
         System.out.println("4. Mostrar envíos de un cliente");
         System.out.println("5. Generar lista de envíos");
         System.out.println("0. Salir");
-        opcion = Utilidades.leerNumero(teclado,"Seleccione opción:",0,5);
+        opcion = Utilidades.leerNumero(teclado,"Seleccione opción: ",0,5);
         return opcion;
     }
 
@@ -179,6 +179,7 @@ public class PlanetExpress {
         Cliente cliente;
         Porte porte;
         ListaPortes listaPortes1;
+        Envio envio;
         char eleccion;
         int opcion;
         if (args.length != 10) {
@@ -212,15 +213,26 @@ public class PlanetExpress {
                     porte = listaPortes1.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR");
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
-                    cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envios: ");
+                    cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envíos: ");
                     cliente.listarEnvios();
-                    cliente.getListaEnvios().seleccionarEnvio(teclado,"Seleccione un evio: ");
+                    envio = cliente.getListaEnvios().seleccionarEnvio(teclado,"Seleccione un envío: ");
+                    eleccion = Utilidades.leerLetraOpciones(teclado,"¿Cancelar envío (c), o generar factura (f)?",'c','f');
+                    if (eleccion=='c'){
+                        if (envio.cancelar()){
+                            System.out.println("   Envio cancelado");
+                        }else System.out.println("   Error al cancelar el envío");
+                    }else{
+                        if (envio.generarFactura(Utilidades.leerCadena(teclado,"Nombre del fichero: "))){
+                            System.out.println("   Factura generada");
+                        }else System.out.println("   Error al generar factura");
+
+                    }
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
                     porte = app.listaPortes.seleccionarPorte(teclado,"Selecciones el porte: ","CANCELAR");
                     if (porte.getListaEnvios().aniadirEnviosCsv(Utilidades.leerCadena(teclado,"Nombre del fichero: "))){
-                        System.out.println("Fichero creado correctamente");
-                    }else System.out.println("Error en la escritura del fichero");
+                        System.out.println("   Fichero creado correctamente");
+                    }else System.out.println("   Error en la escritura del fichero");
                     break;
             }
         } while (opcion != 0);
