@@ -195,7 +195,7 @@ public class PlanetExpress {
             switch (opcion) {
                 case 1:     // TODO: Alta de Porte
                     if((!app.maxPortesAlcanzado())&&(app.insertarPorte(porte=Porte.altaPorte(teclado,new Random(),app.listaPuertosEspaciales,app.listaNaves,app.listaPortes)))) {
-                        System.out.printf("Porte %s creado correctamente",porte.getID());
+                        System.out.printf("Porte %s creado correctamente\n", porte.getID());
                     }
                     break;
                 case 2:     // TODO: Alta de Cliente
@@ -213,6 +213,7 @@ public class PlanetExpress {
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
                     cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envios: ");
+                    cliente.listarEnvios();
                     cliente.getListaEnvios().seleccionarEnvio(teclado,"Seleccione un evio: ");
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
