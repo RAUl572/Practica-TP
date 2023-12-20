@@ -129,6 +129,7 @@ public class ListaClientes {
             }
             return true;
         } catch (FileNotFoundException e) {
+            System.out.println("Error de escritura en el fichero.");
             return false;
         } finally {
             if (pw!=null){
@@ -160,11 +161,18 @@ public class ListaClientes {
                 listaClientes.insertarCliente(nuevo);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("No se ha encontrado el fichero de clientes");
-        } finally {
-            if (sc!=null){
-                sc.close();
+            System.out.println("No se ha encontrado el fichero "+fichero);
+        } catch (Exception ex){
+            System.out.println("Error de lectura");
+        }finally {
+            try {
+                if (sc!=null){
+                    sc.close();
+                }
+            }catch (Exception e){
+                System.out.println("Error de cierre de fichero");
             }
+
         }
         return listaClientes;
     }

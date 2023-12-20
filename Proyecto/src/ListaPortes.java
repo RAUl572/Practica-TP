@@ -137,12 +137,18 @@ public class ListaPortes {
         } catch (FileNotFoundException e) {
             return false;
         }catch (IOException ex){
-            System.out.println(ex.getMessage());
+            System.out.println("Error de escritura en el fichero.");
+            return false;
         }finally {
-            try{if (out!=null){out.flush();out.close();}}
-            catch(IOException ex){System.out.println(ex.getMessage());}
+            try{
+                if (out!=null) {
+                    out.flush();
+                    out.close();
+                }
+            }catch (Exception e){
+                System.out.println("Error de cierre de fichero");
+            }
         }
-        return false;
     }
 
     /**
@@ -176,12 +182,19 @@ public class ListaPortes {
                 ));
             }
         } catch (FileNotFoundException e) {
-            System.out.println("No se ha encontrado el fichero de portes");
+            System.out.println("No se ha encontrado el fichero "+fichero);
         }catch (Exception e) {
+            System.out.println("Error de lectura");
             return null;
         }finally {
-            try{if (in!=null){in.close();}}
-            catch(Exception ex){System.out.println(ex.getMessage());}
+            try{
+                if (in!=null) {
+                    in.close();
+                }
+            }
+            catch (Exception e){
+                System.out.println("Error de cierre de fichero");
+            }
         }
         return listaPortes;
     }

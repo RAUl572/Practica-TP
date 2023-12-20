@@ -147,7 +147,7 @@ public class ListaEnvios {
                 for (int i = posicion; i < ocupacion - 1; i++) {
                     envios[i] = envios[i + 1];
                 }
-                envios[posicion]=null;
+                envios[ocupacion]=null;
                 ocupacion--;
             }
         }
@@ -209,11 +209,17 @@ public class ListaEnvios {
             }
             return true;
         } catch (Exception e) {
+            System.out.println("Error de escritura en el fichero.");
             return false;
         } finally {
-            if (pw!=null){
-                pw.close();
+            try {
+                if (pw!=null){
+                    pw.close();
+                }
+            }catch (Exception e){
+                System.out.println("Error de cierre de fichero");
             }
+
         }
     }
 
@@ -246,9 +252,14 @@ public class ListaEnvios {
         } catch (Exception ex){
             System.out.println("Error de lectura");
         }finally {
-            if (sc!=null){
-                sc.close();
+            try {
+                if (sc!=null){
+                    sc.close();
+                }
+            }catch (Exception e){
+                System.out.println("Error de cierre de fichero");
             }
+
         }
     }
 }
