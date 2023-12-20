@@ -72,8 +72,11 @@ public class ListaPortes {
         for (int i = 0;i<getOcupacion();i++){
             if ((portes[i].getOrigen().getCodigo().equals(codigoOrigen))&&
                     (portes[i].getDestino().getCodigo().equals(codigoDestino))&&
-                    (portes[i].getLlegada()==fecha))
-            {listaPortes.insertarPorte(portes[i]);}
+                    (portes[i].getSalida()==fecha))
+            {
+                // ver porqué no llega a instertar el porte a pesar de que se cumplen tpdas las condiciones
+                listaPortes.insertarPorte(portes[i]);
+            }
         }
         return listaPortes;
     }
@@ -175,7 +178,7 @@ public class ListaPortes {
             }
         } catch (FileNotFoundException e) {
             System.out.println("No se ha encontrado el fichero de portes");
-        }catch (Exception e) {
+        }catch (IOException e) {
             return null;
         }finally {
             try{if (in!=null){in.close();}}

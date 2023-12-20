@@ -95,12 +95,12 @@ public class Envio {
      *     Precio: 13424,56 SSD
      */
     public boolean generarFactura(String fichero) {
-        DataOutputStream out = null;
+        PrintWriter out = null;
         try {
-            out = new DataOutputStream(new FileOutputStream(fichero,false));
-            out.writeUTF(
-                    "-----------------------------------------------------\n"+
-                        "--------- Factura del envío"+getLocalizador()+"--------\n-"+
+            out = new PrintWriter(fichero);
+            out.print(
+                        "-----------------------------------------------------\n"+
+                        "--------- Factura del envío"+getLocalizador()+"--------\n"+
                         "-----------------------------------------------------\n"+
                         "\nPorte: "+getPorte().getID()+
                         "\nOrigen: "+getPorte().getMuelleOrigen()+
@@ -114,14 +114,14 @@ public class Envio {
                         "\n"
             );
         }catch (FileNotFoundException e){System.out.println(e.getMessage());return false;}
-        catch (IOException ex){System.out.println(ex.getMessage());}
+        catch (Exception ex){System.out.println(ex.getMessage());}
         finally {
             try {
                 if (out != null) {
                     out.flush();
                     out.close();
                 }
-            }catch (IOException ex){System.out.println(ex.getMessage());}
+            }catch (Exception ex){System.out.println(ex.getMessage());}
         }
         return true;
     }

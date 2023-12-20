@@ -209,7 +209,7 @@ public class PlanetExpress {
                 case 3:     // TODO: Buscar Porte
                     listaPortes1 = app.buscarPorte(teclado);
                     listaPortes1.listarPortes();
-                    porte = listaPortes1.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR");
+                    listaPortes1.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR").toString();
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
                     cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envios: ");
