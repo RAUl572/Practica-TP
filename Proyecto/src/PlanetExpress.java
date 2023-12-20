@@ -205,7 +205,7 @@ public class PlanetExpress {
                         if (app.insertarCliente(cliente)){
                             System.out.println(cliente.toString()+" ha sido registrado");
                         }
-                    }
+                    }else System.out.println("   Aumente la capacidad de clientes.");
                     break;
                 case 3:     // TODO: Buscar Porte
                     listaPortes1 = app.buscarPorte(teclado);
@@ -230,9 +230,11 @@ public class PlanetExpress {
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
                     porte = app.listaPortes.seleccionarPorte(teclado,"Selecciones el porte: ","CANCELAR");
-                    if (porte.getListaEnvios().aniadirEnviosCsv(Utilidades.leerCadena(teclado,"Nombre del fichero: "))){
-                        System.out.println("   Fichero creado correctamente");
-                    }else System.out.println("   Error en la escritura del fichero");
+                    if (porte!=null) {
+                        if (porte.getListaEnvios().aniadirEnviosCsv(Utilidades.leerCadena(teclado, "Nombre del fichero: "))) {
+                            System.out.println("   Fichero creado correctamente");
+                        }
+                    }
                     break;
             }
         } while (opcion != 0);
