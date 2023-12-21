@@ -195,15 +195,15 @@ public class ListaEnvios {
        para la solicitud y siguiendo el orden y los textos mostrados en el enunciado.
        La función solicita repetidamente hasta que se introduzca un localizador correcto*/
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
-        Envio envio = null;
+        Envio envio;
         String localizador;
         do {
             localizador = Utilidades.leerCadena(teclado,mensaje);
             envio = buscarEnvio(localizador);
-            if (envio==null){
+            if (envio==null&&!localizador.equalsIgnoreCase("cancelar")){
                 System.out.println("     Localizador incorrecto");
             }
-        }while (envio==null);
+        }while (envio==null&&!localizador.equalsIgnoreCase("cancelar"));
         return envio;
     }
 

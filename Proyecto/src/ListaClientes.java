@@ -109,7 +109,10 @@ public class ListaClientes {
         do {
             email = Utilidades.leerCadena(teclado,mensaje);
             cliente = buscarClienteEmail(email);
-        }while (cliente==null);
+            if (cliente == null&&!email.equalsIgnoreCase("cancelar")){
+                System.out.println("   Email no encontrado");
+            }
+        }while (cliente==null&&!email.equalsIgnoreCase("cancelar"));
         return cliente;
     }
 
