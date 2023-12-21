@@ -180,6 +180,7 @@ public class PlanetExpress {
         Porte porte;
         ListaPortes listaPortes1;
         Envio envio;
+        String nombre;
         char eleccion;
         int opcion;
         if (args.length != 10) {
@@ -204,33 +205,37 @@ public class PlanetExpress {
                         if (app.insertarCliente(cliente)){
                             System.out.println("Cliente con email"+cliente.getEmail()+" ha sido registrado");
                         }
-                    }else System.out.println("   Aumente la capacidad de clientes.");
+                    }
                     break;
                 case 3:     // TODO: Buscar Porte
                     listaPortes1 = app.buscarPorte(teclado);
                     app.contratarEnvio(teclado,new Random(),listaPortes1.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR"));
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
-                    cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envíos: ");
-                    if (cliente.listarEnviosBoolean()){
-                        envio = cliente.getListaEnvios().seleccionarEnvio(teclado, "Seleccione un envío: ");
-                        eleccion = Utilidades.leerLetraOpciones(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
-                        if (eleccion == 'c') {
-                            if (envio.cancelar()) {
-                                System.out.println("   Envio cancelado");
-                            } else System.out.println("   Error al cancelar el envío");
-                        } else {
-                            if (envio.generarFactura(Utilidades.leerCadena(teclado, "Nombre del fichero: "))) {
-                                System.out.println("   Factura generada");
-                            } else System.out.println("   Error al generar factura");
+                    if ((cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envíos: "))!=null) {
+                        if (cliente.listarEnviosBoolean()) {
+                            if ((envio = cliente.getListaEnvios().seleccionarEnvio(teclado, "Seleccione un envío: ")) != null) {
+                                eleccion = Utilidades.leerLetraOpciones(teclado, "¿Cancelar envío (c), o generar factura (f)? ", 'c', 'f');
+                                if (eleccion == 'c') {
+                                    if (envio.cancelar()) {
+                                        System.out.println("   Envio cancelado");
+                                    } else System.out.println("   Error al cancelar el envío");
+                                } else {
+                                    nombre = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
+                                    if (!nombre.equalsIgnoreCase("cancelar") && envio.generarFactura(nombre)) {
+                                        System.out.println("   Factura generada");
+                                    }
 
+                                }
+                            }
                         }
                     }
                     break;
                 case 5:     // TODO: Lista de envíos de un porte
                     porte = app.listaPortes.seleccionarPorte(teclado,"Selecciones el porte: ","CANCELAR");
                     if (porte!=null) {
-                        if (porte.getListaEnvios().aniadirEnviosCsv(Utilidades.leerCadena(teclado, "Nombre del fichero: "))) {
+                        nombre = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
+                        if (!nombre.equalsIgnoreCase("cancelar")&&porte.getListaEnvios().aniadirEnviosCsv(nombre)) {
                             System.out.println("   Fichero creado correctamente");
                         }
                     }
