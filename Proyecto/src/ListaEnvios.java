@@ -168,14 +168,19 @@ public class ListaEnvios {
             }
         }else System.out.println("No hay envios");
     }
+
+    /**
+     * Método que muestra todos los envios de la lista
+     * @return devuelve true logra mostrar los envios y
+     * false si no hay envios que mostrar
+     */
     public boolean listarEnviosBoolean() {
-        boolean resul;
-        if (ocupacion>0) {
+        boolean resul=(ocupacion>0);
+        if (resul) {
             for (int i = 0; i < ocupacion; i++) {
                 System.out.println(envios[i].toString());
             }
-            resul = true;
-        }else {System.out.println("No hay envios");resul = false;}
+        }else {System.out.println("No hay envios");}
         return resul;
     }
 
