@@ -95,23 +95,23 @@ public class Envio {
      *     Precio: 13424,56 SSD
      */
     public boolean generarFactura(String fichero) {
-        DataOutputStream out = null;
+        PrintWriter out = null;
         boolean resul=false;
         try {
-            out = new DataOutputStream(new FileOutputStream(fichero,false));
-            out.writeUTF(
-                    "-----------------------------------------------------\n"+
-                        "-----------Factura del envío "+getLocalizador()+"----------\n"+
-                        "-----------------------------------------------------\n"+
-                        "\nPorte: "+getPorte().getID()+
-                        "\nOrigen: "+getPorte().getMuelleOrigen()+
-                        "\nDestino: "+getPorte().getMuelleDestino()+
-                        "\nSalida: "+getPorte().getSalida()+
-                        "\nLlegada: "+getPorte().getLlegada()+
-                        "\nPasajero: "+getCliente().toString()+
-                        "\nAsiento: "+getHueco()+
-                        "\nPrecio: "+getPrecio()+
-                        "\n"
+            out = new PrintWriter(new FileWriter(fichero));
+            out.print(
+                            "-----------------------------------------------------\n"+
+                            "-----------Factura del envío "+getLocalizador()+"----------\n"+
+                            "-----------------------------------------------------\n"+
+                            "\nPorte: "+getPorte().getID()+
+                            "\nOrigen: "+getPorte().getMuelleOrigen()+
+                            "\nDestino: "+getPorte().getMuelleDestino()+
+                            "\nSalida: "+getPorte().getSalida()+
+                            "\nLlegada: "+getPorte().getLlegada()+
+                            "\nPasajero: "+getCliente().toString()+
+                            "\nAsiento: "+getHueco()+
+                            "\nPrecio: "+getPrecio()+
+                            "\n"
             );
             resul = true;
         }catch (FileNotFoundException e){System.out.println(e.getMessage());return resul;}
@@ -122,7 +122,7 @@ public class Envio {
                     out.flush();
                     out.close();
                 }
-            }catch (IOException ex){System.out.println(ex.getMessage());}
+            }catch (Exception ex){System.out.println(ex.getMessage());}
         }
         return resul;
     }
