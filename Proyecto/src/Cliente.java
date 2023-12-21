@@ -71,6 +71,9 @@ public class Cliente {
     public void listarEnvios() {
         listaEnvios.listarEnvios();
     }
+    public boolean listarEnviosBoolean() {
+        return listaEnvios.listarEnviosBoolean();
+    }
     // Encapsula la funcionalidad seleccionarEnvio de ListaEnvios
     public Envio seleccionarEnvio(Scanner teclado, String mensaje) {
         return listaEnvios.seleccionarEnvio(teclado, mensaje);

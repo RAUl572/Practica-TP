@@ -72,7 +72,7 @@ public class ListaPortes {
         for (int i = 0;i<getOcupacion();i++){
             if ((portes[i].getOrigen().getCodigo().equals(codigoOrigen))&&
                     (portes[i].getDestino().getCodigo().equals(codigoDestino))&&
-                    (portes[i].getLlegada()==fecha))
+                    (portes[i].getSalida().coincide(fecha)))
             {listaPortes.insertarPorte(portes[i]);}
         }
         return listaPortes;
@@ -82,7 +82,7 @@ public class ListaPortes {
      * TODO: Muestra por pantalla los Portes siguiendo el formato de los ejemplos del enunciado
      */
     public void listarPortes() {
-        for (int i=0;i<getOcupacion();i++) {System.out.println(portes[i].toString());}
+        for (int i=0;i<getOcupacion();i++) {System.out.println(portes[i].toStringSimple());}
     }
 
 

@@ -254,7 +254,7 @@ public class Porte {
         int muelle, terminal;
         double precio;
         Fecha salida, llegada;
-        Porte nuevoPorte;
+        Porte nuevoPorte=null;
         boolean bucle;
         if (!portes.estaLlena()){
             while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:")) == null) {
@@ -265,6 +265,7 @@ public class Porte {
                 System.out.println("Código de puerto no encontrado.");
             }
             terminal = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - 6): ", 1, 6);
+            naves.mostrarNaves();
             do {
                 bucle = false;
                 matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ");
@@ -272,7 +273,6 @@ public class Porte {
                     System.out.println("Matrícula no encontrada");
                     bucle = true;
                 }else{
-                    // verificar condición, considera 6.66846E-4 menor que 0.613
                     if (naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino))) {
                         System.out.println("Avión seleccionado con alcance insuficiente.");
                         bucle = true;
@@ -287,9 +287,10 @@ public class Porte {
                 }
             } while (llegada.anterior(salida));
             precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, Double.MAX_VALUE);
-            return new Porte(generarID(rand),naves.buscarNave(matricula),
+            nuevoPorte = new Porte(generarID(rand),naves.buscarNave(matricula),
                     puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
                     muelle,salida,puertosEspaciales.buscarPuertoEspacial(codigoDestino),terminal,llegada,precio);
-        }else {System.out.println("Lista de portes llena");return null;}
+            return nuevoPorte;
+        }else {System.out.println("Lista de portes llena");return nuevoPorte;}
     }
 }
