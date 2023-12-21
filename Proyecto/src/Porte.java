@@ -293,7 +293,7 @@ public class Porte {
             nuevoPorte = new Porte(generarID(rand),naves.buscarNave(matricula),
                     puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
                     muelle,salida,puertosEspaciales.buscarPuertoEspacial(codigoDestino),terminal,llegada,precio);
-            return nuevoPorte;
-        }else {System.out.println("Lista de portes llena");return nuevoPorte;}
+        }else {System.out.println("Lista de portes llena");}
+        return nuevoPorte;
     }
 }
