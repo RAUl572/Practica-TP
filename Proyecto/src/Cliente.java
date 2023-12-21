@@ -71,6 +71,13 @@ public class Cliente {
     public void listarEnvios() {
         listaEnvios.listarEnvios();
     }
+
+    /**
+     * Método que llama a la lista del
+     * cliente para mostrar los envíos
+     * @return devuelve true logra mostrar los envios y
+     * false si no hay envios que mostrar
+     */
     public boolean listarEnviosBoolean() {
         return listaEnvios.listarEnviosBoolean();
     }
