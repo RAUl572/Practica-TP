@@ -39,8 +39,8 @@ public class Utilidades {
      */
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         long numero;
-        System.out.println(mensaje);
         do {
+            System.out.println(mensaje);
             numero = teclado.nextLong();
         }while (numero<minimo || numero>maximo);
         return numero;
@@ -56,8 +56,8 @@ public class Utilidades {
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
-        System.out.print(mensaje);
         do {
+            System.out.print(mensaje);
             numero = teclado.nextDouble();
         }while (numero<minimo || numero>maximo);
         return numero;
@@ -73,17 +73,29 @@ public class Utilidades {
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
-        System.out.print(mensaje);
         do {
+            System.out.print(mensaje);
             letra = teclado.next().charAt(0);
         }while (letra<minimo || letra>maximo);
         return letra;
     }
+
+    /**
+     * Método que pide un caracter que se ajuste a una de las opciones dadas.
+     * @param teclado Scanner que lee los caracteres introducidos por el usuario.
+     * @param mensaje Mensaje que se le muestra al usuario.
+     * @param opcion1 Uno de los valores que puede tomar el caracter.
+     * @param opcion2 EL otro valor que puede tomar el caracter.
+     * @return El caracter elegido de las opciones;
+     */
     public static char leerLetraOpciones(Scanner teclado, String mensaje, char opcion1, char opcion2) {
         char letra;
-        System.out.print(mensaje);
         do {
+            System.out.print(mensaje);
             letra = teclado.next().charAt(0);
+            if (letra !=opcion1 && letra !=opcion2){
+                System.out.println("  El valor debe ser '"+opcion1+"' o '"+opcion2+"'");
+            }
         }while (letra !=opcion1 && letra !=opcion2);
         return letra;
     }
@@ -172,9 +184,4 @@ public class Utilidades {
         return teclado.next();
     }
 
-    public static boolean cancelar(String string){
-        boolean cancelar;
-        cancelar = string.equalsIgnoreCase("cancelar");
-        return cancelar;
-    }
 }
