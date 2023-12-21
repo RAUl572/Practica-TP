@@ -123,22 +123,24 @@ public class ListaPortes {
      */
     public boolean escribirPortesCsv(String fichero) {
         BufferedWriter out = null;
+        boolean correcto;
         try {
             out = new BufferedWriter(new FileWriter(fichero));
             for (int i=0;i<getOcupacion();i++) {
                 Porte aux = portes[i];
-                out.write(String.format("%s;%s;%s;%d;%s;%s;%d;%s;%f",
+                out.write(String.format("%s;%s;%s;%d;%s;%s;%d;%s;%f\n",
                         aux.getID(),aux.getNave().getMatricula(),aux.getOrigen().getCodigo(),aux.getMuelleOrigen(),
                         aux.getSalida().toString(),aux.getDestino().getCodigo(),aux.getMuelleDestino(),
                         aux.getLlegada().toString(),aux.getPrecio())
                 );
             }
-            return true;
+            correcto = true;
         } catch (FileNotFoundException e) {
-            return false;
+            System.out.println("No se ha encontrado el fichero "+fichero);
+            correcto = false;
         }catch (IOException ex){
             System.out.println("Error de escritura en el fichero.");
-            return false;
+            correcto = false;
         }finally {
             try{
                 if (out!=null) {
@@ -149,6 +151,7 @@ public class ListaPortes {
                 System.out.println("Error de cierre de fichero");
             }
         }
+        return correcto;
     }
 
     /**
@@ -161,10 +164,11 @@ public class ListaPortes {
      * @return
      */
     public static ListaPortes leerPortesCsv(String fichero, int capacidad, ListaPuertosEspaciales puertosEspaciales, ListaNaves naves) {
-        ListaPortes listaPortes = new ListaPortes(capacidad);
+        ListaPortes listaPortes = null;
         BufferedReader in=null;
         try {
             in = new BufferedReader(new FileReader(fichero));
+            listaPortes = new ListaPortes(capacidad);
             String[] porte;
             String linea;
             while((linea = in.readLine())!=null){
@@ -185,7 +189,7 @@ public class ListaPortes {
             System.out.println("No se ha encontrado el fichero "+fichero);
         }catch (Exception e) {
             System.out.println("Error de lectura");
-            return null;
+            listaPortes = null;
         }finally {
             try{
                 if (in!=null) {

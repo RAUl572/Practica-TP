@@ -122,20 +122,22 @@ public class ListaClientes {
        fichero*/
     public boolean escribirClientesCsv(String fichero) {
         PrintWriter pw = null;
+        boolean correcto;
         try {
             pw = new PrintWriter(fichero);
             for (int i =0 ; i<ocupacion;i++){
                 pw.println(clientes[i].toStringCSV());
             }
-            return true;
+            correcto = true;
         } catch (FileNotFoundException e) {
             System.out.println("Error de escritura en el fichero.");
-            return false;
+            correcto = false;
         } finally {
             if (pw!=null){
                 pw.close();
             }
         }
+        return correcto;
     }
 
     /**
@@ -164,6 +166,7 @@ public class ListaClientes {
             System.out.println("No se ha encontrado el fichero "+fichero);
         } catch (Exception ex){
             System.out.println("Error de lectura");
+            listaClientes = null;
         }finally {
             try {
                 if (sc!=null){

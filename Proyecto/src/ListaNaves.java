@@ -135,16 +135,20 @@ public class ListaNaves {
      */
     public boolean escribirNavesCsv(String nombre) {
         PrintWriter pw = null;
+        boolean correcto;
         try {
             pw = new PrintWriter(nombre);
             for (int i=0;i<ocupacion;i++){
                 pw.println(naves[i].toStringCsv());
             }
-            return true;
+            correcto = true;
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero "+nombre);
+            correcto = false;
         } catch (Exception e) {
             System.out.println("Error de escritura en el fichero.");
-            return false;
-        } finally {
+            correcto = false;
+        }finally {
             try {
                 if (pw!=null){
                     pw.close();
@@ -154,6 +158,7 @@ public class ListaNaves {
             }
 
         }
+        return correcto;
     }
 
 
@@ -164,10 +169,11 @@ public class ListaNaves {
      * @return True si el proceso se ejecuta correctamente, false si hay algún error.
      */
     public static ListaNaves leerNavesCsv(String fichero, int capacidad) {
-        ListaNaves listaNaves = new ListaNaves(capacidad);
+        ListaNaves listaNaves = null;
         Scanner sc = null;
         try {
             sc = new Scanner(new FileReader(fichero));
+            listaNaves = new ListaNaves(capacidad);
             String [] nave;
             Nave nueva;
             while (sc.hasNextLine()){
@@ -180,6 +186,7 @@ public class ListaNaves {
             System.out.println("No se ha encontrado el fichero "+fichero);
         }catch (Exception e){
             System.out.println("Error de lectura");
+            listaNaves = null;
         } finally {
             try {
                 if (sc!=null){
