@@ -53,10 +53,11 @@ public class ListaPortes {
      * @return el objeto Porte que encontramos o null si no existe
      */
     public Porte buscarPorte(String id) {
+        Porte porte=null;
         for (int i = 0;i<getOcupacion();i++){
-            if (portes[i].getID().equals(id)){return portes[i];}
+            if (portes[i].getID().equals(id)){porte = portes[i];}
         }
-        return null;
+        return porte;
     }
 
     /**

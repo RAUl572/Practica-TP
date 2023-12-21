@@ -198,6 +198,7 @@ public class Porte {
      */
     public boolean generarListaEnvios(String fichero) {
         PrintWriter pw = null;
+        boolean resul;
         try {
             pw = new PrintWriter(fichero);
             for (int i = 0;i< listaEnvios.getOcupacion();i++) {
@@ -209,15 +210,16 @@ public class Porte {
                         listaEnvios.getEnvio(i).getPrecio()+"\n"
                 );
             }
-            return true;
+            resul = true;
         } catch (FileNotFoundException e) {
-            return false;
+            resul = false;
         }finally {
                 if (pw!=null){
                     pw.flush();
                     pw.close();
                 }
         }
+        return resul;
     }
 
 
