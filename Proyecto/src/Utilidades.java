@@ -56,7 +56,7 @@ public class Utilidades {
      */
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
-        System.out.println(mensaje);
+        System.out.print(mensaje);
         do {
             numero = teclado.nextDouble();
         }while (numero<minimo || numero>maximo);
@@ -73,7 +73,7 @@ public class Utilidades {
      */
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
-        System.out.println(mensaje);
+        System.out.print(mensaje);
         do {
             letra = teclado.next().charAt(0);
         }while (letra<minimo || letra>maximo);
@@ -81,7 +81,7 @@ public class Utilidades {
     }
     public static char leerLetraOpciones(Scanner teclado, String mensaje, char opcion1, char opcion2) {
         char letra;
-        System.out.println(mensaje);
+        System.out.print(mensaje);
         do {
             letra = teclado.next().charAt(0);
         }while (letra !=opcion1 && letra !=opcion2);
@@ -170,5 +170,11 @@ public class Utilidades {
     public static String leerCadena(Scanner teclado, String s) {
         System.out.print(s);
         return teclado.next();
+    }
+
+    public static boolean cancelar(String string){
+        boolean cancelar;
+        cancelar = string.equalsIgnoreCase("cancelar");
+        return cancelar;
     }
 }

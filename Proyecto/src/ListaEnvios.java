@@ -212,15 +212,19 @@ public class ListaEnvios {
     // TODO: Añade los Envios al final de un fichero CSV, SIN SOBREESCRIBIR la información
     public boolean aniadirEnviosCsv(String fichero) {
         PrintWriter pw = null;
+        boolean correcto;
         try {
             pw = new PrintWriter(new FileWriter(fichero, true));
             for (int i=0;i<ocupacion;i++){
                 pw.println(envios[i].toStringCSV());
             }
-            return true;
-        } catch (Exception e) {
-            System.out.println("Error de escritura en el fichero.");
-            return false;
+            correcto = true;
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el fichero "+fichero);
+            correcto = false;
+        } catch (Exception ex){
+            System.out.println("Error de lectura");
+            correcto = false;
         } finally {
             try {
                 if (pw!=null){
@@ -231,6 +235,7 @@ public class ListaEnvios {
             }
 
         }
+        return correcto;
     }
 
     /**

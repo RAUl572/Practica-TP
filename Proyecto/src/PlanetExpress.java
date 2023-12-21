@@ -200,10 +200,9 @@ public class PlanetExpress {
                     }
                     break;
                 case 2:     // TODO: Alta de Cliente
-                    if (!app.maxClientesAlcanzado()) {
-                        cliente = Cliente.altaCliente(teclado, app.listaClientes, app.maxEnviosPorCliente);
+                    if ((cliente = Cliente.altaCliente(teclado, app.listaClientes, app.maxEnviosPorCliente)) != null) {
                         if (app.insertarCliente(cliente)){
-                            System.out.println(cliente.toString()+" ha sido registrado");
+                            System.out.println("Cliente con email"+cliente.getEmail()+" ha sido registrado");
                         }
                     }else System.out.println("   Aumente la capacidad de clientes.");
                     break;

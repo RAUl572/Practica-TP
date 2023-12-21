@@ -96,35 +96,42 @@ public class Envio {
      */
     public boolean generarFactura(String fichero) {
         PrintWriter out = null;
-        boolean resul=false;
+        boolean correcto;
         try {
-            out = new PrintWriter(new FileWriter(fichero));
+            out = new PrintWriter(new FileWriter(fichero,false));
             out.print(
-                            "-----------------------------------------------------\n"+
-                            "-----------Factura del envío "+getLocalizador()+"----------\n"+
-                            "-----------------------------------------------------\n"+
-                            "\nPorte: "+getPorte().getID()+
-                            "\nOrigen: "+getPorte().getMuelleOrigen()+
-                            "\nDestino: "+getPorte().getMuelleDestino()+
-                            "\nSalida: "+getPorte().getSalida()+
-                            "\nLlegada: "+getPorte().getLlegada()+
-                            "\nPasajero: "+getCliente().toString()+
-                            "\nAsiento: "+getHueco()+
-                            "\nPrecio: "+getPrecio()+
-                            "\n"
+                    "-----------------------------------------------------\n"+
+                        "--------- Factura del envío "+getLocalizador()+"--------\n-"+
+                        "-----------------------------------------------------\n"+
+                        "\nPorte: "+getPorte().getID()+
+                        "\nOrigen: "+getPorte().getMuelleOrigen()+
+                        "\nDestino: "+getPorte().getMuelleDestino()+
+                        "\nSalida: "+getPorte().getSalida()+
+                        "\nLlegada: "+getPorte().getLlegada()+
+                        "\nPasajero: "+getCliente().toString()+
+                        "\nAsiento: "+getHueco()+
+                        "\nPrecio: "+getPrecio()+
+                        "\n"
             );
-            resul = true;
-        }catch (FileNotFoundException e){System.out.println(e.getMessage());return resul;}
-        catch (IOException ex){System.out.println(ex.getMessage());}
+            correcto = true;
+        }catch (FileNotFoundException e){
+            System.out.println("Fichero "+fichero+" no encontrado");
+            correcto = false;
+        }
+        catch (Exception ex){
+            System.out.println("Error al generar la factura");
+            correcto = false;
+        }
         finally {
             try {
                 if (out != null) {
                     out.flush();
                     out.close();
                 }
-            }catch (Exception ex){System.out.println(ex.getMessage());}
+            }catch (Exception ex){
+                System.out.println("Error al cerrar el fichero.");}
         }
-        return resul;
+        return correcto;
     }
 
 
@@ -158,13 +165,17 @@ public class Envio {
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
         int fila, columna;
+        Envio nuevo = null;
         if ((!porte.porteLleno())){
             porte.imprimirMatrizHuecos();
             do {
                 fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
                 columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
             } while (porte.huecoOcupado(fila, (Integer.parseInt(String.valueOf(columna)))));
-            return new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
-        }else {System.out.println("Porte lleno");return null;}
+            nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
+        }else {
+            System.out.println("Porte lleno");
+        }
+        return nuevo;
     }
 }
