@@ -101,7 +101,7 @@ public class Envio {
             out = new PrintWriter(new FileWriter(fichero,false));
             out.print(
                     "-----------------------------------------------------\n"+
-                        "--------- Factura del envío "+getLocalizador()+"--------\n-"+
+                        "-----------Factura del envío "+getLocalizador()+"----------\n"+
                         "-----------------------------------------------------\n"+
                         "\nPorte: "+getPorte().getID()+
                         "\nOrigen: "+getPorte().getMuelleOrigen()+
