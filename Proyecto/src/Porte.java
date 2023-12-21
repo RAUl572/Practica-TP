@@ -176,14 +176,15 @@ public class Porte {
      *     10[ ][ ][ ]
      */
     public void imprimirMatrizHuecos() {
-        for (int j=0;j<huecos[0].length;j++){System.out.println("   "+(char)(64+j));}
+        for (int j=0;j<huecos[0].length;j++){System.out.print("   "+(char)(65+j));}
+        System.out.print("\n");
         for (int i = 0;i<huecos.length;i++){
-            System.out.println(" "+i);
+            System.out.print(" "+i);
             for (int j = 0;j<huecos[i].length;j++){
                 if (huecos[i][j]){
-                    System.out.println("[X] ");
+                    System.out.print("[X] ");
                 }else {
-                    System.out.println("[ ] " );
+                    System.out.print("[ ] " );
                 }
             }
             System.out.println("\n");
