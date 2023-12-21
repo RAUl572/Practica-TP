@@ -96,11 +96,12 @@ public class Envio {
      */
     public boolean generarFactura(String fichero) {
         DataOutputStream out = null;
+        boolean resul=false;
         try {
             out = new DataOutputStream(new FileOutputStream(fichero,false));
             out.writeUTF(
                     "-----------------------------------------------------\n"+
-                        "--------- Factura del envío "+getLocalizador()+"--------\n-"+
+                        "-----------Factura del envío "+getLocalizador()+"----------\n"+
                         "-----------------------------------------------------\n"+
                         "\nPorte: "+getPorte().getID()+
                         "\nOrigen: "+getPorte().getMuelleOrigen()+
@@ -108,12 +109,12 @@ public class Envio {
                         "\nSalida: "+getPorte().getSalida()+
                         "\nLlegada: "+getPorte().getLlegada()+
                         "\nPasajero: "+getCliente().toString()+
-                        "\ntipo de billete: "+
                         "\nAsiento: "+getHueco()+
                         "\nPrecio: "+getPrecio()+
                         "\n"
             );
-        }catch (FileNotFoundException e){System.out.println(e.getMessage());return false;}
+            resul = true;
+        }catch (FileNotFoundException e){System.out.println(e.getMessage());return resul;}
         catch (IOException ex){System.out.println(ex.getMessage());}
         finally {
             try {
@@ -123,7 +124,7 @@ public class Envio {
                 }
             }catch (IOException ex){System.out.println(ex.getMessage());}
         }
-        return true;
+        return resul;
     }
 
 

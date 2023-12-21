@@ -209,23 +209,23 @@ public class PlanetExpress {
                     break;
                 case 3:     // TODO: Buscar Porte
                     listaPortes1 = app.buscarPorte(teclado);
-                    listaPortes1.listarPortes();
-                    porte = listaPortes1.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR");
+                    System.out.println(listaPortes1.seleccionarPorte(teclado,"Introduzca el id del porte que quiere ver: ","CANCELAR").toString());
                     break;
                 case 4:     // TODO: Listado de envíos de un cliente
                     cliente = app.listaClientes.seleccionarCliente(teclado,"Introduzca el email del cliente del que desea ver los envíos: ");
-                    cliente.listarEnvios();
-                    envio = cliente.getListaEnvios().seleccionarEnvio(teclado,"Seleccione un envío: ");
-                    eleccion = Utilidades.leerLetraOpciones(teclado,"¿Cancelar envío (c), o generar factura (f)?",'c','f');
-                    if (eleccion=='c'){
-                        if (envio.cancelar()){
-                            System.out.println("   Envio cancelado");
-                        }else System.out.println("   Error al cancelar el envío");
-                    }else{
-                        if (envio.generarFactura(Utilidades.leerCadena(teclado,"Nombre del fichero: "))){
-                            System.out.println("   Factura generada");
-                        }else System.out.println("   Error al generar factura");
+                    if (cliente.listarEnviosBoolean()){
+                        envio = cliente.getListaEnvios().seleccionarEnvio(teclado, "Seleccione un envío: ");
+                        eleccion = Utilidades.leerLetraOpciones(teclado, "¿Cancelar envío (c), o generar factura (f)?", 'c', 'f');
+                        if (eleccion == 'c') {
+                            if (envio.cancelar()) {
+                                System.out.println("   Envio cancelado");
+                            } else System.out.println("   Error al cancelar el envío");
+                        } else {
+                            if (envio.generarFactura(Utilidades.leerCadena(teclado, "Nombre del fichero: "))) {
+                                System.out.println("   Factura generada");
+                            } else System.out.println("   Error al generar factura");
 
+                        }
                     }
                     break;
                 case 5:     // TODO: Lista de envíos de un porte

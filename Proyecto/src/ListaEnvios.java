@@ -168,6 +168,16 @@ public class ListaEnvios {
             }
         }else System.out.println("No hay envios");
     }
+    public boolean listarEnviosBoolean() {
+        boolean resul;
+        if (ocupacion>0) {
+            for (int i = 0; i < ocupacion; i++) {
+                System.out.println(envios[i].toString());
+            }
+            resul = true;
+        }else {System.out.println("No hay envios");resul = false;}
+        return resul;
+    }
 
     /**
      * Busca un envío en base a un localizador que se pide al usuario, se repite el proceso hasta que se introduzca uno correcto.
