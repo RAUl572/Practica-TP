@@ -170,7 +170,7 @@ public class Envio {
             porte.imprimirMatrizHuecos();
             do {
                 fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
-                columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
+                columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));//Se recibe la columna como una letra como en la matriz de huecos
             } while (porte.huecoOcupado(fila-1, (Integer.parseInt(String.valueOf(columna)))-64));
             nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
         }else {
