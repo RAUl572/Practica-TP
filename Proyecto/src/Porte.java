@@ -267,7 +267,7 @@ public class Porte {
         double precio;
         Fecha salida, llegada;
         Porte nuevoPorte=null;
-        boolean bucle;
+        boolean bucle=true;
         if (!portes.estaLlena()){
             if (!(codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:")).equalsIgnoreCase("cancelar")) {
                 while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen) == null) {
@@ -281,17 +281,13 @@ public class Porte {
                     terminal = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - 6): ", 1, 6);
                     naves.mostrarNaves();
                     do {
-                        bucle = (matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave: ")).equalsIgnoreCase("cancelar");
-                        if ((!bucle) && (naves.buscarNave(matricula) == null)) {
+                        bucle = (matricula=Utilidades.leerCadena(teclado,"Ingrese matrícula de la nave:")).equalsIgnoreCase("cancelar");
+                        if ((naves.buscarNave(matricula) == null)&&(!bucle)) {
                             System.out.println("Matrícula no encontrada");
-                            bucle = true;
-                        } else {
-                            if ((naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino)))) {
+                        }else if ((!bucle)&&(naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino)))) {
                                 System.out.println("Avión seleccionado con alcance insuficiente.");
-                                bucle = true;
-                            }
                         }
-                    } while (bucle);
+                    }while(bucle);
                     salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
                     do {
                         llegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada: ");
