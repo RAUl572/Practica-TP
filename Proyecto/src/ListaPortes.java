@@ -131,10 +131,10 @@ public class ListaPortes {
             out = new BufferedWriter(new FileWriter(fichero));
             for (int i=0;i<getOcupacion();i++) {
                 Porte aux = portes[i];
-                out.write(String.format("%s;%s;%s;%d;%s;%s;%d;%s;%f\n",
+                out.write(String.format("%s;%s;%s;%d;%s;%s;%d;%s;%s\n",
                         aux.getID(),aux.getNave().getMatricula(),aux.getOrigen().getCodigo(),aux.getMuelleOrigen(),
                         aux.getSalida().toString(),aux.getDestino().getCodigo(),aux.getMuelleDestino(),
-                        aux.getLlegada().toString(),aux.getPrecio())
+                        aux.getLlegada().toString(),String.valueOf(aux.getPrecio()).replace(',','.'))
                 );
             }
             correcto = true;
