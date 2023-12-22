@@ -121,13 +121,13 @@ public class PlanetExpress {
         if (porte != null) {
             System.out.println("1. Cliente ya registrado");
             System.out.println("2. Nuevo cliente");
-            opcion = Utilidades.leerNumero(teclado,"Selecciona la opcion",1,2);
+            opcion = Utilidades.leerNumero(teclado,"Selecciona la opcion: ",1,2);
             if (opcion==2){
                 cliente = Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
                 listaClientes.insertarCliente(cliente);
             } else {
                 do {
-                    email = Utilidades.leerCadena(teclado,"Introduzca su email");
+                    email = Utilidades.leerCadena(teclado,"Introduzca su email: ");
                 }while (!Cliente.correctoEmail(email));
                 cliente = listaClientes.buscarClienteEmail(email);
             }
