@@ -12,13 +12,14 @@ import java.util.Scanner;
 public class Utilidades {
 
     /**
-     * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * Método que lee un número long dentro de un rango de posibilidades.
      * @param teclado Nombre del Scanner que recibe el método.
      * @param mensaje Mensaje que se muestra por pantalla e indica al usuario los datos que se necesitan.
      * @param minimo Número más pequeño que se puede recibir.
      * @param maximo Número más grande que se puede recibir.
      * @return int Valor que se ha introducido y cumple los límites puestos.
      */
+    //TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
         int numero;
         do {
@@ -30,13 +31,14 @@ public class Utilidades {
     }
 
     /**
-     * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * Método que lee un número long dentro de un rango de posibilidades.
      * @param teclado Nombre del Scanner que recibe el método.
      * @param mensaje Mensaje que se muestra por pantalla e indica al usuario los datos que se necesitan.
      * @param minimo Número más pequeño que se puede recibir.
      * @param maximo Número más grande que se puede recibir.
      * @return long Valor que se ha introducido y cumple los límites puestos.
      */
+    //TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
     public static long leerNumero(Scanner teclado, String mensaje, long minimo, long maximo) {
         long numero;
         do {
@@ -47,13 +49,14 @@ public class Utilidades {
     }
 
     /**
-     * TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * Método que lee un número double dentro de un rango de posibilidades.
      * @param teclado Nombre del Scanner que recibe el método.
      * @param mensaje Mensaje que se muestra por pantalla e indica al usuario los datos que se necesitan.
      * @param minimo Número más pequeño que se puede recibir.
      * @param maximo Número más grande que se puede recibir.
      * @return double Valor que se ha introducido y cumple los límites puestos.
      */
+    //TODO: Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
     public static double leerNumero(Scanner teclado, String mensaje, double minimo, double maximo) {
         double numero;
         do {
@@ -64,13 +67,14 @@ public class Utilidades {
     }
 
     /**
-     * TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
+     * Método que pide un carácter dentro de un rango.
      * @param teclado Nombre del Scanner que recibe el método.
      * @param mensaje Mensaje que se muestra por pantalla e indica al usuario los datos que se necesitan.
-     * @param minimo Caracter mínimo(en valor de la tabla ASCII) que se puede introducir.
-     * @param maximo Caracter máximo(en valor de la tabla ASCII) que se puede introducir.
-     * @return char Caracter que se ha introducido y cumple los límites puestos.
+     * @param minimo Carácter mínimo(en valor de la tabla ASCII) que se puede introducir.
+     * @param maximo Carácter máximo(en valor de la tabla ASCII) que se puede introducir.
+     * @return char Carácter que se ha introducido y cumple los límites puestos.
      */
+    //TODO: TODO: Solicita una letra repetidamente hasta que se introduzca uno correcto (dentro de los límites)
     public static char leerLetra(Scanner teclado, String mensaje, char minimo, char maximo) {
         char letra;
         do {
@@ -81,12 +85,12 @@ public class Utilidades {
     }
 
     /**
-     * Método que pide un caracter que se ajuste a una de las opciones dadas.
+     * Método que pide un carácter que se ajuste a una de las opciones dadas.
      * @param teclado Scanner que lee los caracteres introducidos por el usuario.
      * @param mensaje Mensaje que se le muestra al usuario.
-     * @param opcion1 Uno de los valores que puede tomar el caracter.
-     * @param opcion2 EL otro valor que puede tomar el caracter.
-     * @return El caracter elegido de las opciones;
+     * @param opcion1 Uno de los valores que puede tomar el carácter.
+     * @param opcion2 El otro valor que puede tomar el carácter.
+     * @return El carácter elegido de las opciones;
      */
     public static char leerLetraOpciones(Scanner teclado, String mensaje, char opcion1, char opcion2) {
         char letra;
@@ -102,11 +106,12 @@ public class Utilidades {
 
 
     /**
-     * TODO: Solicita una fecha repetidamente hasta que se introduzca una correcta
+     * Método que lee una fecha correcta.
      * @param teclado Nombre del Scanner que recibe el método.
      * @param mensaje Mensaje que se muestra por pantalla e indica al usuario los datos que se necesitan.
      * @return Fecha nueva fecha correcta creada.
      */
+    //TODO: Solicita una fecha repetidamente hasta que se introduzca una correcta
     public static Fecha leerFecha(Scanner teclado, String mensaje) {
         int dia;
         int mes;
@@ -132,11 +137,12 @@ public class Utilidades {
 
 
     /**
-     * TODO: Solicita una fecha y hora repetidamente hasta que se introduzcan unas correctas
+     * Método que lee una fecha con hora correcta.
      * @param teclado Nombre del Scanner que recibe el método.
      * @param mensaje Mensaje que se muestra por pantalla e indica al usuario los datos que se necesitan.
      * @return Fecha nueva fecha con hora correcta.
      */
+    //TODO: Solicita una fecha y hora repetidamente hasta que se introduzcan unas correctas
     public static Fecha leerFechaHora(Scanner teclado, String mensaje) {
         int dia;
         int mes;
@@ -174,11 +180,12 @@ public class Utilidades {
     }
 
     /**
-     * TODO: Imprime por pantalla el String pasado por parámetro
+     * Método que imprime un string y lee una cadena de caracteres.
      * @param teclado Nombre del Scanner que recibe el método.
      * @param s String que se debe mostrar.
      * @return Cadena de que se recibe.
      */
+    //TODO: Imprime por pantalla el String pasado por parámetro
     public static String leerCadena(Scanner teclado, String s) {
         System.out.print(s);
         return teclado.next();
