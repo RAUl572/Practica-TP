@@ -235,7 +235,7 @@ public class PlanetExpress {
                     porte = app.listaPortes.seleccionarPorte(teclado,"Selecciones el porte: ","CANCELAR");
                     if (porte!=null) {
                         nombre = Utilidades.leerCadena(teclado, "Nombre del fichero: ");
-                        if (!nombre.equalsIgnoreCase("cancelar")&&porte.getListaEnvios().aniadirEnviosCsv(nombre)) {
+                        if (!nombre.equalsIgnoreCase("cancelar")&&porte.generarListaEnvios(nombre)) {
                             System.out.println("   Fichero creado correctamente");
                         }
                     }

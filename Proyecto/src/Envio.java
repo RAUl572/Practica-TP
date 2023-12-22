@@ -60,10 +60,7 @@ public class Envio {
     }
     //TODO: Texto que debe generar: Envío PM1111AAAABBBBC para Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05) en hueco 6C por 13424,56 SSD
     public String toString() {
-        return ("Envío "+getLocalizador()+
-                " para Porte "+getPorte().toStringSimple()
-                //...
-                );
+        return ("Envío "+getLocalizador()+" para Porte "+getPorte().toStringSimple()+" en hueco "+getFila()+((char)getColumna()+65)+" por "+getPrecio()+" SSD");
     }
 
     /**

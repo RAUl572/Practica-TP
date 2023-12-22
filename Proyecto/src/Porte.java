@@ -199,20 +199,27 @@ public class Porte {
      */
     public boolean generarListaEnvios(String fichero) {
         PrintWriter pw = null;
+        Envio envio;
         boolean resul;
         try {
             pw = new PrintWriter(fichero);
-            for (int i = 0;i< listaEnvios.getOcupacion();i++) {
-                pw.write(listaEnvios.getEnvio(i).getLocalizador()+";"+
-                        getID()+";" +
-                        listaEnvios.getEnvio(i).getCliente().getEmail()+";"+
-                        listaEnvios.getEnvio(i).getFila()+";"+
-                        listaEnvios.getEnvio(i).getColumna()+";"+
-                        listaEnvios.getEnvio(i).getPrecio()+"\n"
-                );
+            pw.print("--------------------------------------------------------------\n" +
+                     "--------- Lista de envíos del porte "+getID()+"--------------------\n" +
+                     "--------------------------------------------------------------\n");
+            pw.println("Hueco  Cliente");
+            for (int i = 1;i<=getNave().getFilas();i++) {
+                for (int j = 1;j<=getNave().getColumnas();j++) {
+                    pw.print(i);
+                    pw.print((char)(64+j));
+                    if ((envio = buscarEnvio(i,j))!=null){
+                        pw.print("       "+envio.getCliente().toString());
+                    }
+                    pw.print("\n");
+                }
             }
             resul = true;
         } catch (FileNotFoundException e) {
+            System.out.println("Fichero "+fichero+" no encontrado");
             resul = false;
         }finally {
                 if (pw!=null){
