@@ -76,6 +76,7 @@ public class ListaPortes {
                     (portes[i].getSalida().coincide(fecha)))
             {listaPortes.insertarPorte(portes[i]);}
         }
+        if (listaPortes.getOcupacion()==0){listaPortes = null;}
         return listaPortes;
     }
 

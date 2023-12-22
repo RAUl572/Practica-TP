@@ -100,8 +100,12 @@ public class PlanetExpress {
     public ListaPortes buscarPorte(Scanner teclado) {
             String codigoOrigen = listaPuertosEspaciales.seleccionarPuertoEspacial(teclado,"Ingrese código de puerto Origen: ").getCodigo();
             String codigoDestino = listaPuertosEspaciales.seleccionarPuertoEspacial(teclado,"Ingrese código de puerto Destino: ").getCodigo();
-            Fecha fecha = Utilidades.leerFecha(teclado,"Fecha de salida: ");
-        return listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
+            ListaPortes listaPortes1;
+            do {
+                Fecha fecha = Utilidades.leerFecha(teclado, "Fecha de salida: ");
+                listaPortes1 = listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
+            }while(listaPortes1!=null);
+            return listaPortes1;
     }
 
 
