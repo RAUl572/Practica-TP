@@ -87,9 +87,9 @@ public class Porte {
         return precio;
     }
     // TODO: Devuelve el número de huecos libres que hay en el porte
-    public int numHuecosLibres() {return (huecos.length-numHuecos);}
+    public int numHuecosLibres() {return (nave.getFilas()* nave.getColumnas()-numHuecos);}
     // TODO: ¿Están llenos todos los huecos?
-    public boolean porteLleno() {return (huecos.length==numHuecos);}
+    public boolean porteLleno() {return (nave.getFilas()* nave.getColumnas()==numHuecos);}
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
         return  huecos[fila][columna] ;
@@ -115,11 +115,11 @@ public class Porte {
      * @return
      */
     public boolean ocuparHueco(Envio envio) {
-        boolean libre = !huecoOcupado(envio.getFila(),envio.getColumna());
+        boolean libre = !huecoOcupado(envio.getFila()-1,envio.getColumna()-1);
         if (libre){
             listaEnvios.insertarEnvio(envio);
             numHuecos++;
-            huecos[envio.getFila()][envio.getColumna()]=true;
+            huecos[envio.getFila()-1][envio.getColumna()-1]=true;
         }
         return libre;
     }
@@ -144,7 +144,7 @@ public class Porte {
     public String toString() {
         return "Porte "+getID()+" de "+getOrigen().toStringSimple()+" M"+getMuelleOrigen()+" ("+getSalida()+") a "
                 +getDestino().toStringSimple()+" M"+getMuelleDestino()+" ("+getLlegada()+") en "+getNave().toStringSimple()+" por "
-                +getPrecio()+" SSD, huecos libres: "+(nave.getFilas()* nave.getColumnas()-numHuecos);
+                +getPrecio()+" SSD, huecos libres: "+numHuecosLibres();
     }
 
     /**
@@ -182,7 +182,7 @@ public class Porte {
         System.out.print("\n");
         for (int i = 0;i<getNave().getFilas();i++){
             System.out.print(" "+(i+1));
-            for (int j = 0;j< getNave().getColumnas();j++){
+            for (int j = 0;j<getNave().getColumnas();j++){
                 if (huecos[i][j]){
                     System.out.print("[X] ");
                 }else {
