@@ -188,7 +188,7 @@ public class ListaEnvios {
      * Busca un envío en base a un localizador que se pide al usuario, se repite el proceso hasta que se introduzca uno correcto.
      * @param teclado Scanner que lee los inputs del usuario.
      * @param mensaje Mensaje que se le mustra al usuario.
-     * @return EL envío cuyo localizador coincide con el introducido.
+     * @return El envío cuyo localizador coincide con el introducido.
      */
     /*
       TODO: Permite seleccionar un Envio existente a partir de su localizador, usando el mensaje pasado como argumento
