@@ -170,7 +170,7 @@ public class ListaEnvios {
 
     /**
      * Método que muestra todos los envios de la lista
-     * @return devuelve true logra mostrar los envios y
+     * @return devuelve true si logra mostrar los envios y
      * false si no hay envios que mostrar
      */
     public boolean listarEnviosBoolean() {
