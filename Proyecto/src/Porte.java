@@ -258,6 +258,7 @@ public class Porte {
      * @param portes
      * @return
      */
+
     public static Porte altaPorte(Scanner teclado, Random rand,
                                   ListaPuertosEspaciales puertosEspaciales,
                                   ListaNaves naves,
@@ -267,40 +268,55 @@ public class Porte {
         double precio;
         Fecha salida, llegada;
         Porte nuevoPorte=null;
-        boolean bucle=true;
+        boolean bucle;
         if (!portes.estaLlena()){
+            //entrada de parámetros para los puertos y muelles
             if (!(codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:")).equalsIgnoreCase("cancelar")) {
                 while (puertosEspaciales.buscarPuertoEspacial(codigoOrigen) == null) {
                     System.out.println("Código de puerto no encontrado.");
+                    codigoOrigen = Utilidades.leerCadena(teclado, "Ingrese código de puerto Origen:");
                 }
                 muelle = Utilidades.leerNumero(teclado, "Ingrese el muelle de Origen (1 - 4):", 1, 4);
-                if (!(codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino:")).equalsIgnoreCase("cancelar")){
+                if (!(codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino:")).equalsIgnoreCase("cancelar")) {
                     while ((puertosEspaciales.buscarPuertoEspacial(codigoDestino)) == null) {
                         System.out.println("Código de puerto no encontrado.");
+                        codigoDestino = Utilidades.leerCadena(teclado, "Ingrese código de puerto Destino:");
                     }
                     terminal = Utilidades.leerNumero(teclado, "Ingrese Terminal Destino (1 - 6): ", 1, 6);
+
+                    //Entrada de parámetros para la nave
                     naves.mostrarNaves();
-                    do {
-                        bucle = (matricula=Utilidades.leerCadena(teclado,"Ingrese matrícula de la nave:")).equalsIgnoreCase("cancelar");
-                        if ((naves.buscarNave(matricula) == null)&&(!bucle)) {
-                            System.out.println("Matrícula no encontrada");
-                        }else if ((!bucle)&&(naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino)))) {
+                    if (!(matricula = Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave:")).equalsIgnoreCase("cancelar")) {
+                        do {
+                            if (naves.buscarNave(matricula) == null) {
+                                System.out.println("Matrícula no encontrada");
+                                bucle = true;
+                            } else if ((naves.buscarNave(matricula).getAlcance() < puertosEspaciales.buscarPuertoEspacial(codigoOrigen).distancia(puertosEspaciales.buscarPuertoEspacial(codigoDestino)))) {
                                 System.out.println("Avión seleccionado con alcance insuficiente.");
-                        }
-                    }while(bucle);
-                    salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
-                    do {
-                        llegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada: ");
-                        if (llegada.anterior(salida)) {
-                            System.out.println("La llegada debe ser posterior a la salida");
-                        }
-                    } while (llegada.anterior(salida));
-                    precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, Double.MAX_VALUE);
-                    nuevoPorte = new Porte(generarID(rand), naves.buscarNave(matricula),
-                            puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
-                            muelle, salida, puertosEspaciales.buscarPuertoEspacial(codigoDestino), terminal, llegada, precio);
+                                bucle = true;
+                            } else {bucle = false;}
+                            if (bucle){matricula= Utilidades.leerCadena(teclado, "Ingrese matrícula de la nave:");}
+                        } while (bucle);
+
+                        //Entrada de parámetros para las fechas de salida y llegada
+                        salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
+                        do {
+                            llegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada: ");
+                            if (llegada.anterior(salida)) {
+                                System.out.println("La llegada debe ser posterior a la salida");
+                            }
+                        } while (llegada.anterior(salida));
+
+                        //Entrada de parámetros para el precio
+                        precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, Double.MAX_VALUE);
+
+                        //Creación del porte
+                        nuevoPorte = new Porte(generarID(rand), naves.buscarNave(matricula),
+                                puertosEspaciales.buscarPuertoEspacial(codigoOrigen),
+                                muelle, salida, puertosEspaciales.buscarPuertoEspacial(codigoDestino), terminal, llegada, precio);
                     }
                 }
+            }
             }else{System.out.println("Lista de portes llena");}
             return nuevoPorte;
         }
