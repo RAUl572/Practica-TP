@@ -143,7 +143,7 @@ public class Envio {
      */
     public static String generarLocalizador(Random rand, String idPorte) {
         StringBuilder localizador = new StringBuilder(idPorte);
-        for (int i=1;i<=3;i++){
+        for (int i=1;i<=9;i++){
             localizador.append((char)(65+rand.nextInt(25)));
         }
         return localizador.toString();
