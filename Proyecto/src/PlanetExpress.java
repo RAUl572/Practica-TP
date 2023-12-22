@@ -129,7 +129,7 @@ public class PlanetExpress {
                 do {
                     email = Utilidades.leerCadena(teclado,"Introduzca su email");
                 }while (!Cliente.correctoEmail(email));
-                cliente = listaClientes.buscarClienteEmail("email");
+                cliente = listaClientes.buscarClienteEmail(email);
             }
             contratado = Envio.altaEnvio(teclado,rand,porte,cliente);
             cliente.aniadirEnvio(contratado);

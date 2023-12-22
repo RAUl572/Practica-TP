@@ -171,7 +171,7 @@ public class Envio {
             do {
                 fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
                 columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
-            } while (porte.huecoOcupado(fila, (Integer.parseInt(String.valueOf(columna)))));
+            } while (porte.huecoOcupado(fila-1, (Integer.parseInt(String.valueOf(columna)))-64));
             nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
         }else {
             System.out.println("Porte lleno");
