@@ -163,16 +163,18 @@ public class Envio {
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
         int fila, columnaInt;
         char columna;
+        double precio;
         Envio nuevo = null;
         if ((!porte.porteLleno())){
             porte.imprimirMatrizHuecos();
             do {
-                fila = (Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas())-1);
+                fila = (Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas()));
                 columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
-                columnaInt = (columna-65);
-            } while (porte.huecoOcupado(fila, columnaInt));
-            nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,columnaInt,porte.getPrecio());
-            porte.ocuparHueco(nuevo);
+                columnaInt = (columna-64);
+            } while (porte.huecoOcupado(fila-1, columnaInt-1));
+            precio = Utilidades.leerNumero(teclado,"Precio del envio: ",0,Double.MAX_VALUE);
+            nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,columnaInt,precio);
+            if (porte.ocuparHueco(nuevo)) System.out.println("    Envío "+nuevo.getLocalizador()+" creado correctamente ");
         }else {
             System.out.println("Porte lleno");
         }

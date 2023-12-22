@@ -118,22 +118,22 @@ public class PlanetExpress {
      * @param porte
      */
     public void contratarEnvio(Scanner teclado, Random rand, Porte porte) {
-        int opcion;
+        char opcion;
         Cliente cliente = null;
         String email;
         Envio contratado;
         if (porte != null) {
-            System.out.println("1. Cliente ya registrado");
-            System.out.println("2. Nuevo cliente");
-            opcion = Utilidades.leerNumero(teclado,"Selecciona la opcion: ",1,2);
-            if (opcion==2){
+            opcion = Utilidades.leerLetraOpciones(teclado,"¿Comprar billete para un nuevo cliente(n), o para uno ya existente (e)? ",'n','e');
+            if (opcion=='n'){
                 cliente = Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
                 listaClientes.insertarCliente(cliente);
             } else {
-                do {
-                    email = Utilidades.leerCadena(teclado,"Introduzca su email: ");
-                }while (!Cliente.correctoEmail(email));
-                cliente = listaClientes.buscarClienteEmail(email);
+                while (cliente==null) {
+                    do {
+                        email = Utilidades.leerCadena(teclado, "Introduzca su email: ");
+                    } while (!Cliente.correctoEmail(email));
+                    cliente = listaClientes.buscarClienteEmail(email);
+                }
             }
             contratado = Envio.altaEnvio(teclado,rand,porte,cliente);
             cliente.aniadirEnvio(contratado);
@@ -246,7 +246,6 @@ public class PlanetExpress {
                     break;
             }
         } while (opcion != 0);
-
         app.guardarDatos(args[5],args[6],args[7],args[8],args[9]);
 
     }
