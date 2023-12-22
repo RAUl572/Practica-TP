@@ -42,8 +42,9 @@ public class ListaPortes {
      * @return false en caso de estar llena la lista o de error
      */
     public boolean insertarPorte(Porte porte) {
-        if (!estaLlena()){portes[getOcupacion()]=porte;ocupacion++;return true;}
-        return false;
+        boolean resul = false;
+        if ((porte!=null)&&(!estaLlena())){portes[getOcupacion()]=porte;ocupacion++;resul = true;}
+        return resul;
     }
 
 
