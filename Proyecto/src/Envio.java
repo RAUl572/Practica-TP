@@ -161,15 +161,18 @@ public class Envio {
      * @return Envio para el porte y cliente especificados
      */
     public static Envio altaEnvio(Scanner teclado, Random rand, Porte porte, Cliente cliente) {
-        int fila, columna;
+        int fila, columnaInt;
+        char columna;
         Envio nuevo = null;
         if ((!porte.porteLleno())){
             porte.imprimirMatrizHuecos();
             do {
-                fila = Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas());
-                columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));//Se recibe la columna como una letra como en la matriz de huecos
-            } while (porte.huecoOcupado(fila-1, (Integer.parseInt(String.valueOf(columna)))-64));
-            nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,(Integer.parseInt(String.valueOf(columna))),porte.getPrecio());
+                fila = (Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas())-1);
+                columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
+                columnaInt = (columna-65);
+            } while (porte.huecoOcupado(fila, columnaInt));
+            nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,columnaInt,porte.getPrecio());
+            porte.ocuparHueco(nuevo);
         }else {
             System.out.println("Porte lleno");
         }

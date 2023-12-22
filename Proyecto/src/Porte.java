@@ -92,7 +92,7 @@ public class Porte {
     public boolean porteLleno() {return (huecos.length==numHuecos);}
     // TODO: ¿Está ocupado el hueco consultado?
     public boolean huecoOcupado(int fila, int columna) {
-        return  huecos[fila-1][columna-1] ;
+        return  huecos[fila][columna] ;
     }
     public Envio buscarEnvio(String localizador) {
         return listaEnvios.buscarEnvio(localizador);
@@ -119,7 +119,7 @@ public class Porte {
         if (libre){
             listaEnvios.insertarEnvio(envio);
             numHuecos++;
-            huecos[envio.getFila()-1][envio.getColumna()-1]=true;
+            huecos[envio.getFila()][envio.getColumna()]=true;
         }
         return libre;
     }
