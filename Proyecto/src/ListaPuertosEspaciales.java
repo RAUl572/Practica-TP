@@ -53,9 +53,9 @@ public class ListaPuertosEspaciales {
     }
 
     /**
-     * Dado un indice da el puerto que le corresponde en la lista.
-     * @param i Indice que se recibe.
-     * @return Puerto espacial correspondiente a ese indice.
+     * Dado un índice da el puerto que le corresponde en la lista.
+     * @param i Índice que se recibe.
+     * @return Puerto espacial correspondiente a ese índice.
      */
     // TODO: Devuelve un puerto espacial dado un indice
     public PuertoEspacial getPuertoEspacial(int i) {
@@ -63,10 +63,11 @@ public class ListaPuertosEspaciales {
     }
 
     /**
-     * TODO: insertamos un Puerto espacial nuevo en la lista
+     * Método que inserta un puerto a la lista.
      * @param puertoEspacial Puerto que se quiere añadir a la lista.
      * @return true en caso de que se añada correctamente, false en caso de lista llena o error
      */
+    //TODO: insertamos un Puerto espacial nuevo en la lista
     public boolean insertarPuertoEspacial(PuertoEspacial puertoEspacial) {
         boolean espacios = !estaLlena();
         if (espacios) {
@@ -77,10 +78,11 @@ public class ListaPuertosEspaciales {
     }
 
     /**
-     * TODO: Buscamos un Puerto espacial a partir del codigo pasado como parámetro
+     * Método que busca en la lista a partir de su código.
      * @param codigo Código del puerto que estamos buscando.
      * @return Puerto espacial que encontramos o null si no existe
      */
+    //TODO: Buscamos un Puerto espacial a partir del codigo pasado como parámetro
     public PuertoEspacial buscarPuertoEspacial(String codigo) {
         PuertoEspacial buscado = null;
         int indice=0;
@@ -95,13 +97,14 @@ public class ListaPuertosEspaciales {
         return buscado;
     }
     /**
-     * TODO: Permite seleccionar un puerto espacial existente a partir de su código, usando el mensaje pasado como
-     *  argumento para la solicitud y siguiendo el orden y los textos mostrados en el enunciado.
-     *  La función solicita repetidamente el código hasta que se introduzca uno correcto
+     * Método que permite elegir un puerto espacial de la lista con su código.
      * @param teclado Scanner que lee los códigos que introduce el usuario.
      * @param mensaje Instrucciones sobre lo que se necesita que se introduzca.
      * @return El puerto espacial con código igual al introducido.
      */
+    //TODO: Permite seleccionar un puerto espacial existente a partir de su código, usando el mensaje pasado como
+    // argumento para la solicitud y siguiendo el orden y los textos mostrados en el enunciado.
+    // La función solicita repetidamente el código hasta que se introduzca uno correcto
     public PuertoEspacial seleccionarPuertoEspacial(Scanner teclado, String mensaje) {
         PuertoEspacial puertoEspacial;
         do {
@@ -112,10 +115,11 @@ public class ListaPuertosEspaciales {
     }
 
     /**
-     * TODO: Genera un fichero CSV con la lista de puertos espaciales, SOBREESCRIBIENDOLO
+     * Método que genera un fichero con el formato CSV en el fichero indicado.
      * @param nombre Nombre del fichero en el que se va a escribir el fichero CSV de la lista.
      * @return True si el proceso se ejecuta correctamente, false si hay algún error.
      */
+    //TODO: Genera un fichero CSV con la lista de puertos espaciales, SOBREESCRIBIENDOLO
     public boolean escribirPuertosEspacialesCsv(String nombre) {
         PrintWriter pw = null;
         boolean correcto;
@@ -146,12 +150,13 @@ public class ListaPuertosEspaciales {
 
 
     /**
-     * TODO: Genera una lista de PuertosEspaciales a partir del fichero CSV, usando el argumento como capacidad máxima
-     *  de la lista
+     * Método que lee un fichero con formato CSV y crea una lista de puertos espaciales a partir de él.
      * @param fichero Nombre del fichero CSV del que se van a leer los puertos espaciales.
      * @param capacidad Número de puertos del fichero.
      * @return True si el proceso se ejecuta correctamente, false si hay algún error.
      */
+    //TODO: Genera una lista de PuertosEspaciales a partir del fichero CSV, usando el argumento como capacidad máxima
+    // de la lista
     public static ListaPuertosEspaciales leerPuertosEspacialesCsv(String fichero, int capacidad) {
         ListaPuertosEspaciales listaPuertosEspaciales = null;
         Scanner sc = null;
