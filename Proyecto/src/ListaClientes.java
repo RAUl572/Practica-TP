@@ -135,9 +135,16 @@ public class ListaClientes {
         } catch (FileNotFoundException e) {
             System.out.println("Error de escritura en el fichero.");
             correcto = false;
+        } catch (Exception ex){
+            System.out.println("Error de escritura");
+            correcto = false;
         } finally {
-            if (pw!=null){
-                pw.close();
+            try {
+                if (pw!=null){
+                    pw.close();
+                }
+            }catch (Exception e){
+                System.out.println("Error de cierre de fichero");
             }
         }
         return correcto;

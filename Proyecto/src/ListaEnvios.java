@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * La clase ListaEnvios sirve para tener organizados los envios que se hacen con la aplicación.
- * Estos envios se pueden ver por el porte o por el cliente que los haga.
+ * La clase ListaEnvíos sirve para tener organizados los envíos que se hacen con la aplicación.
+ * Estos envíos se pueden ver por el porte o por el cliente que los haga.
  *
  * @author Raúl Fernández Iglesias.
  * @author Noel López Losada.
@@ -11,17 +11,17 @@ import java.util.Scanner;
  */
 public class ListaEnvios {
     /**
-     * Array que contiene los envios de la lista.
+     * Array que contiene los envíos de la lista.
      */
     private Envio[] envios;
     /**
-     * Número de envios que contiene la lista.
+     * Número de envíos que contiene la lista.
      */
     private int ocupacion;
 
     /**
-     * EL constructor de la clase, la inicia dada una capacidad.
-     * Además inicia la ocupación de la lista a 0 ya que está vacía.
+     * El constructor de la clase, la inicia dada una capacidad.
+     * Además, inicia la ocupación de la lista a 0, ya que está vacía.
      *
      * @param capacidad Número máximo de envios de la lista.
      */
@@ -52,7 +52,7 @@ public class ListaEnvios {
     /**
      * Da un envío del que se conoce su índice en la lista.
      * @param i Índice del envio en la lista.
-     * @return EL envio al que le corresponde el índice.
+     * @return El envio al que le corresponde el índice.
      */
 	//TODO: Devuelve el envio dado un indice
     public Envio getEnvio(int i) {
@@ -134,7 +134,7 @@ public class ListaEnvios {
         return devolver;
     }
     /**
-     * Borra un envío de la lista sabuendo su localizador.
+     * Borra un envío de la lista sabiendo su localizador.
      * @param localizador Localizador del envío que se va a eliminar.
      * @return True si se ha borrado correctamente, false en cualquier otro caso.
      */
@@ -156,7 +156,6 @@ public class ListaEnvios {
 
     /**
      * Muestra por pantalla los envíos de la lista.
-     *
      */
     /*TODO: Muestra por pantalla los Envios de la lista, con el formato que aparece
        en el enunciado
@@ -185,7 +184,7 @@ public class ListaEnvios {
     }
 
     /**
-     * Busca un envío en base a un localizador que se pide al usuario, se repite el proceso hasta que se introduzca uno correcto.
+     * Busca un envío a partir de un localizador que se pide al usuario, se repite el proceso hasta que se introduzca uno correcto.
      * @param teclado Scanner que lee los inputs del usuario.
      * @param mensaje Mensaje que se le mustra al usuario.
      * @return El envío cuyo localizador coincide con el introducido.
@@ -228,7 +227,7 @@ public class ListaEnvios {
             System.out.println("No se ha encontrado el fichero "+fichero);
             correcto = false;
         } catch (Exception ex){
-            System.out.println("Error de lectura");
+            System.out.println("Error de escritura");
             correcto = false;
         } finally {
             try {
