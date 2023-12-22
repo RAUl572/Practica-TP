@@ -97,16 +97,17 @@ public class Cliente {
      * @return Cliente
      */
     public static Cliente altaCliente(Scanner teclado, ListaClientes clientes, int maxEnvios) {
-        String nombre, apellidos, email;
+        String nombre, apellidos, email = null;
         Cliente nuevo = null;
         if (!clientes.estaLlena()){
             do {
-                nombre = Utilidades.leerCadena(teclado, "Nombre: ");
-                apellidos = Utilidades.leerCadena(teclado, "Apellidos: ");
-                email = Utilidades.leerCadena(teclado, "Email: ");
-            } while (!correctoEmail(email)&&(clientes.buscarClienteEmail(email)==null));
-            nuevo = new Cliente(nombre, apellidos, email, maxEnvios);
-        }
+                if (!(nombre = (Utilidades.leerCadena(teclado, "Nombre: "))).equalsIgnoreCase("cancelar")){
+                    apellidos = (Utilidades.leerCadena(teclado, "Apellidos: "));
+                    email = (Utilidades.leerCadena(teclado, "Email: "));
+                    if (email!=null&&correctoEmail(email))nuevo = new Cliente(nombre, apellidos, email, maxEnvios);
+                }
+            } while (email==null&&(clientes.buscarClienteEmail(email)==null)&&!(nombre.equalsIgnoreCase("cancelar")));
+        }else System.out.println("   Aumente la capacidad de clientes.");
         return nuevo;
     }
 
