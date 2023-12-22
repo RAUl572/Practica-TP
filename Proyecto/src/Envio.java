@@ -101,8 +101,8 @@ public class Envio {
                         "-----------Factura del envío "+getLocalizador()+"----------\n"+
                         "-----------------------------------------------------\n"+
                         "\nPorte: "+getPorte().getID()+
-                        "\nOrigen: "+getPorte().getMuelleOrigen()+
-                        "\nDestino: "+getPorte().getMuelleDestino()+
+                        "\nOrigen: "+getPorte().getOrigen().toStringSimple()+
+                        "\nDestino: "+getPorte().getDestino().toStringSimple()+
                         "\nSalida: "+getPorte().getSalida()+
                         "\nLlegada: "+getPorte().getLlegada()+
                         "\nPasajero: "+getCliente().toString()+
