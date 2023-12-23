@@ -103,7 +103,7 @@ public class Envio {
      */
     // TODO: Ejemplos: "1A" para el hueco con fila 1 y columna 1, "3D" para el hueco con fila 3 y columna 4
     public String getHueco() {
-        return (Integer.toString(getFila())+(char)(65+getColumna()));
+        return String.format("%d%c",(getFila()),((char)(64+getColumna())));
     }
 
     /**
@@ -241,9 +241,9 @@ public class Envio {
                 fila = (Utilidades.leerNumero(teclado,"Seleccione una fila: ",1,porte.getNave().getFilas()));
                 columna = Utilidades.leerLetra(teclado,"Seleccione una columna: ",'A',((char)(64+porte.getNave().getColumnas())));
                 columnaInt = (columna-64);
-            } while (porte.huecoOcupado(fila-1, columnaInt-1));
+            } while (porte.huecoOcupado(fila, columnaInt));
             precio = Utilidades.leerNumero(teclado,"Precio del envio: ",0,Double.MAX_VALUE);
-            nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,fila,columnaInt,precio);
+            nuevo = new Envio(Envio.generarLocalizador(rand,porte.getID()),porte,cliente,(fila),(columnaInt),precio);
             if (porte.ocuparHueco(nuevo)) System.out.println("    Envío "+nuevo.getLocalizador()+" creado correctamente ");
         }else {
             System.out.println("Porte lleno");
