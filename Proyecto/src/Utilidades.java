@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Utilidades es una clase que incluye métodos para la lectura de números(enteros y con decimales), caracteres y fechas
- * determinando que sean correctos bajo unos limites establecidos.
+ * determinando que sean correctos bajo unos límites establecidos.
  * Se utilizará cuando se necesiten datos del cliente.
  *
  * @author Raúl Fernández Iglesias
