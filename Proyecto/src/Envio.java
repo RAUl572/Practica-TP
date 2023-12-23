@@ -120,7 +120,7 @@ public class Envio {
      */
     //TODO: Texto que debe generar: Envío PM1111AAAABBBBC para Porte PM0066 de GGT M5 (01/01/2023 08:15:00) a CID M1 (01/01/2024 11:00:05) en hueco 6C por 13424,56 SSD
     public String toString() {
-        return String.format("Envío %s para Porte %s en hueco %s por %f SSD",getLocalizador(),getPorte().toStringSimple(),getHueco(),getPrecio());
+        return String.format("Envío %s para %s en hueco %s por %f SSD",getLocalizador(),getPorte().toStringSimple(),getHueco(),getPrecio());
     }
 
     /**
