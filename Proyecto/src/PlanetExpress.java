@@ -191,7 +191,7 @@ public class PlanetExpress {
             }
             contratado = Envio.altaEnvio(teclado,rand,porte,cliente);
             cliente.aniadirEnvio(contratado);
-            System.out.printf("Envío %s contratado\n",contratado.toString());
+            System.out.printf(" %s contratado\n",contratado.toString());
         }
     }
 
