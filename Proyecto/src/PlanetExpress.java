@@ -152,12 +152,12 @@ public class PlanetExpress {
     // enunciado de la prática)
     public ListaPortes buscarPorte(Scanner teclado) {
         ListaPortes listaPortes1;
-        String codigoOrigen = listaPuertosEspaciales.seleccionarPuertoEspacial(teclado,"Ingrese código de puerto Origen: ").getCodigo();
-        String codigoDestino = listaPuertosEspaciales.seleccionarPuertoEspacial(teclado,"Ingrese código de puerto Destino: ").getCodigo();
-        do {
-            Fecha fecha = Utilidades.leerFecha(teclado, "Fecha de salida: ");
-            listaPortes1 = listaPortes.buscarPortes(codigoOrigen, codigoDestino, fecha);
-        }while(listaPortes1==null);
+        while((listaPortes1 = listaPortes.buscarPortes(
+                listaPuertosEspaciales.seleccionarPuertoEspacial(teclado,"Ingrese código de puerto Origen: ").getCodigo(),
+                listaPuertosEspaciales.seleccionarPuertoEspacial(teclado,"Ingrese código de puerto Destino: ").getCodigo(),
+                Utilidades.leerFecha(teclado, "Fecha de salida: ")))==null){
+            System.out.println("Datos sin coincidencia");
+        }
         return listaPortes1;
     }
 
