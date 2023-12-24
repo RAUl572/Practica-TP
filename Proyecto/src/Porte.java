@@ -5,7 +5,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Description of the class
+ * Porte es una clase que permite controlan donde se llevan los envíos los lugares entre los que se mueven y sus fechas
+ * a parte de poder identificarlos. Además de permitir imprimir la matriz de los envíos y de imprimir la lista de
+ * envíos del porte en un fichero.
  *
  * @author Raúl Fernández Iglesias.
  * @author Noel López Losada.
