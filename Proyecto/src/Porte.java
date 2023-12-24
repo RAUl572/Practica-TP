@@ -417,8 +417,8 @@ public class Porte {
                         } while (bucle);
 
                         //Entrada de parámetros para las fechas de salida y llegada
-                        salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
                         do {
+                            salida = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de salida: ");
                             llegada = Utilidades.leerFechaHora(teclado, "Introduzca la fecha de llegada: ");
                             if (llegada.anterior(salida)) {
                                 System.out.println("La llegada debe ser posterior a la salida");
@@ -426,7 +426,7 @@ public class Porte {
                         } while (llegada.anterior(salida));
 
                         //Entrada de parámetros para el precio
-                        precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje", 0, Double.MAX_VALUE);
+                        precio = Utilidades.leerNumero(teclado, "Ingrese precio del pasaje: ", 0, Double.MAX_VALUE);
 
                         //Creación del porte
                         nuevoPorte = new Porte(generarID(rand), naves.buscarNave(matricula),

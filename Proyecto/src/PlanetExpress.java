@@ -179,8 +179,11 @@ public class PlanetExpress {
         if (porte != null) {
             opcion = Utilidades.leerLetraOpciones(teclado,"¿Comprar billete para un nuevo cliente(n), o para uno ya existente (e)? ",'n','e');
             if (opcion=='n'){
-                cliente = Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
-                listaClientes.insertarCliente(cliente);
+                do {
+                    cliente = Cliente.altaCliente(teclado,listaClientes,maxEnviosPorCliente);
+                    listaClientes.insertarCliente(cliente);
+                }while (listaClientes.buscarClienteEmail(cliente.getEmail())==null);
+
             } else {
                 while (cliente==null) {
                     do {
@@ -191,7 +194,6 @@ public class PlanetExpress {
             }
             contratado = Envio.altaEnvio(teclado,rand,porte,cliente);
             cliente.aniadirEnvio(contratado);
-            System.out.printf(" %s contratado\n",contratado.toString());
         }
     }
 
@@ -265,7 +267,7 @@ public class PlanetExpress {
                 case 2:     // TODO: Alta de Cliente
                     if ((cliente = Cliente.altaCliente(teclado, app.listaClientes, app.maxEnviosPorCliente)) != null) {
                         if (app.insertarCliente(cliente)){
-                            System.out.println("Cliente con email"+cliente.getEmail()+" ha sido registrado");
+                            System.out.println("Cliente con email "+cliente.getEmail()+" ha sido registrado");
                         }
                     }
                     break;
